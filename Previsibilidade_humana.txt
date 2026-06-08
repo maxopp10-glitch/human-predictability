@@ -1,0 +1,101 @@
+import streamlit as st
+import pandas as pd
+import os
+import uuid
+from datetime import datetime
+
+# =========================
+# CONFIGURAÇÕES
+# =========================
+
+DATA_PATH = "data/responses.csv"
+
+st.title("Human Predictability")
+
+st.subheader("Experimento #1 — Número de 1 a 10")
+
+st.write(
+    "Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo."
+)
+
+# =========================
+# CRIAR ID ANÔNIMO
+# =========================
+
+if "user_id" not in st.session_state:
+    st.session_state.user_id = "USER_" + str(uuid.uuid4())[:8].upper()
+
+user_id = st.session_state.user_id
+
+st.info(f"Seu ID anônimo nesta sessão é: {user_id}")
+
+# =========================
+# FORMULÁRIO
+# =========================
+
+idade = st.number_input(
+    "Qual sua idade?",
+    min_value=10,
+    max_value=100,
+    step=1
+)
+
+numero = st.selectbox(
+    "Pense rapidamente em um número de 1 a 10. Qual número você escolheu?",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+)
+
+# =========================
+# SALVAR RESPOSTA
+# =========================
+
+if st.button("Enviar"):
+    agora = datetime.now()
+
+    nova_resposta = pd.DataFrame({
+        "user_id": [user_id],
+        "idade": [idade],
+        "numero": [numero],
+        "timestamp": [agora.strftime("%Y-%m-%d %H:%M:%S")],
+        "hora": [agora.hour],
+        "dia_semana": [agora.strftime("%A")]
+    })
+
+    if os.path.exists(DATA_PATH):
+        dados_existentes = pd.read_csv(DATA_PATH)
+        dados_atualizados = pd.concat(
+            [dados_existentes, nova_resposta],
+            ignore_index=True
+        )
+        dados_atualizados.to_csv(DATA_PATH, index=False)
+
+    else:
+        nova_resposta.to_csv(DATA_PATH, index=False)
+
+    st.success("Resposta registrada com sucesso!")
+
+# =========================
+# RESUMO DO DATASET
+# =========================
+
+st.divider()
+
+st.subheader("Resumo parcial do experimento")
+
+if os.path.exists(DATA_PATH):
+    df = pd.read_csv(DATA_PATH)
+
+    st.write(f"Total de respostas coletadas: **{len(df)}**")
+    st.write(f"Total de usuários anônimos: **{df['user_id'].nunique()}**")
+
+    st.write("Distribuição dos números escolhidos:")
+
+    contagem_numeros = df["numero"].value_counts().sort_index()
+
+    st.bar_chart(contagem_numeros)
+
+    with st.expander("Visualizar dados coletados"):
+        st.dataframe(df)
+
+else:
+    st.write("Ainda não há respostas coletadas.")
