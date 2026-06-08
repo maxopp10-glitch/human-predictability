@@ -1,16 +1,45 @@
 import streamlit as st
 import pandas as pd
-import os
 import uuid
 from datetime import datetime
 from streamlit_cookies_manager import EncryptedCookieManager
+import gspread
+from google.oauth2.service_account import Credentials
 
 # =========================
 # CONFIGURAÇÕES
 # =========================
 
-DATA_PATH = "data/responses.csv"
 MAX_RESPOSTAS_SEMANA = 3
+
+SCOPES = [
+    "https://www.googleapis.com/auth/spreadsheets"
+]
+
+# =========================
+# GOOGLE SHEETS
+# =========================
+
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=SCOPES
+)
+
+client = gspread.authorize(creds)
+
+sheet = client.open_by_key(
+    st.secrets["sheets"]["sheet_id"]
+).sheet1
+
+
+def carregar_dados():
+    dados = sheet.get_all_records()
+    return pd.DataFrame(dados)
+
+
+def salvar_resposta(nova_resposta):
+    sheet.append_row(nova_resposta)
+
 
 # =========================
 # COOKIES
@@ -100,10 +129,7 @@ semana_ano = f"{agora.year}-{agora.isocalendar().week}"
 # CARREGAR DADOS
 # =========================
 
-if os.path.exists(DATA_PATH):
-    df_respostas = pd.read_csv(DATA_PATH)
-else:
-    df_respostas = pd.DataFrame()
+df_respostas = carregar_dados()
 
 # =========================
 # FUNÇÃO DE LIMITE SEMANAL
@@ -306,28 +332,20 @@ else:
             agora - st.session_state.start_time
         ).total_seconds()
 
-        nova_resposta = pd.DataFrame({
-            "user_id": [user_id],
-            "idade": [idade],
-            "sexo": [sexo],
-            "tipo_experimento": [experimento],
-            "resposta": [resposta],
-            "timestamp": [agora.strftime("%Y-%m-%d %H:%M:%S")],
-            "hora": [agora.hour],
-            "dia_semana": [agora.strftime("%A")],
-            "semana_ano": [semana_ano],
-            "tempo_resposta_segundos": [round(tempo_resposta, 2)]
-        })
+        nova_resposta = [
+            user_id,
+            idade,
+            sexo,
+            experimento,
+            resposta,
+            agora.strftime("%Y-%m-%d %H:%M:%S"),
+            agora.hour,
+            agora.strftime("%A"),
+            semana_ano,
+            round(tempo_resposta, 2)
+        ]
 
-        if os.path.exists(DATA_PATH):
-            dados_existentes = pd.read_csv(DATA_PATH)
-            dados_atualizados = pd.concat(
-                [dados_existentes, nova_resposta],
-                ignore_index=True
-            )
-            dados_atualizados.to_csv(DATA_PATH, index=False)
-        else:
-            nova_resposta.to_csv(DATA_PATH, index=False)
+        salvar_resposta(nova_resposta)
 
         st.session_state.experimento_iniciado = False
         st.session_state.start_time = None
@@ -344,9 +362,9 @@ st.divider()
 
 st.subheader("Resumo parcial do experimento")
 
-if os.path.exists(DATA_PATH):
-    df = pd.read_csv(DATA_PATH)
+df = carregar_dados()
 
+if not df.empty:
     st.write(f"Total de respostas coletadas: **{len(df)}**")
     st.write(f"Total de usuários anônimos: **{df['user_id'].nunique()}**")
 
