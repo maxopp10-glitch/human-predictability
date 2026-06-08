@@ -130,6 +130,30 @@ semana_ano = f"{agora.year}-{agora.isocalendar().week}"
 # =========================
 
 df_respostas = carregar_dados()
+# =========================
+# CONTADOR GLOBAL
+# =========================
+
+if not df_respostas.empty:
+    total_respostas_global = len(df_respostas)
+    total_participantes_global = df_respostas["user_id"].nunique()
+else:
+    total_respostas_global = 0
+    total_participantes_global = 0
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.metric(
+        label="Participantes",
+        value=total_participantes_global
+    )
+
+with col2:
+    st.metric(
+        label="Respostas",
+        value=total_respostas_global
+    )
 
 # =========================
 # FUNÇÃO DE LIMITE SEMANAL
