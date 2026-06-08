@@ -220,27 +220,11 @@ else:
     if experimento == "numero_0_100":
         st.write("Escolha rapidamente um número de 0 a 100.")
 
-        bloco_numero = st.selectbox(
-            "Primeiro, escolha o bloco:",
-            [
-                "0-10",
-                "11-20",
-                "21-30",
-                "31-40",
-                "41-50",
-                "51-60",
-                "61-70",
-                "71-80",
-                "81-90",
-                "91-100"
-            ]
-        )
-
-        inicio_bloco, fim_bloco = map(int, bloco_numero.split("-"))
-
-        resposta = st.selectbox(
-            "Agora escolha o número:",
-            list(range(inicio_bloco, fim_bloco + 1))
+        resposta = st.number_input(
+            "Qual número você escolheu?",
+            min_value=0,
+            max_value=100,
+            step=1
         )
 
     elif experimento == "cor":
