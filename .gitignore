@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+
+data/responses.csv
+
+.streamlit/
+
+*.pyc
+*.pyo
+*.pyd
+
+.DS_Store
+Thumbs.db
