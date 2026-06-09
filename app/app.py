@@ -253,16 +253,34 @@ if not st.session_state.experimento_iniciado:
 
 else:
     experimento = st.session_state.experimento_atual
+    resposta_valida = True
+    resposta = None
 
     if experimento == "numero_0_100":
         st.write("Escolha rapidamente um número de 0 a 100.")
 
-        resposta = st.number_input(
+        numero_digitado = st.text_input(
             "Qual número você escolheu?",
-            min_value=0,
-            max_value=100,
-            step=1
+            placeholder="Digite um número entre 0 e 100"
         )
+
+        if numero_digitado.strip() == "":
+            resposta_valida = False
+            st.info("Digite um número para enviar sua resposta.")
+
+        else:
+            try:
+                numero_convertido = int(numero_digitado)
+
+                if 0 <= numero_convertido <= 100:
+                    resposta = numero_convertido
+                else:
+                    resposta_valida = False
+                    st.warning("O número precisa estar entre 0 e 100.")
+
+            except ValueError:
+                resposta_valida = False
+                st.warning("Digite apenas números inteiros, sem letras ou símbolos.")
 
     elif experimento == "cor":
         st.write("Escolha rapidamente uma cor.")
@@ -346,7 +364,7 @@ else:
             ]
         )
 
-    if st.button("Enviar resposta"):
+    if st.button("Enviar resposta", disabled=not resposta_valida):
         agora = datetime.now()
 
         tempo_resposta = (
