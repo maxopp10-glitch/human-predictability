@@ -520,6 +520,11 @@ else:
         errors="coerce"
     )
 
+    df_respostas.loc[
+        df_respostas["tempo_resposta_segundos"] > 100,
+        "tempo_resposta_segundos"
+    ] = df_respostas["tempo_resposta_segundos"] / 100
+
     tempo_medio = (
         df_respostas
         .groupby("tipo_experimento")["tempo_resposta_segundos"]
