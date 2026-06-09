@@ -509,21 +509,24 @@ else:
 
     st.write("Tempo médio de resposta por experimento")
 
-    df_respostas["tempo_resposta_segundos"] = (
+    
+    tempo_coluna = (
         df_respostas["tempo_resposta_segundos"]
         .astype(str)
         .str.replace(",", ".", regex=False)
-    )
+)
 
-    df_respostas["tempo_resposta_segundos"] = pd.to_numeric(
-        df_respostas["tempo_resposta_segundos"],
+    tempo_coluna = pd.to_numeric(
+        tempo_coluna,
         errors="coerce"
-    )
+    ).astype(float)
 
-    df_respostas.loc[
-        df_respostas["tempo_resposta_segundos"] > 100,
-        "tempo_resposta_segundos"
-    ] = df_respostas["tempo_resposta_segundos"] / 100
+    tempo_coluna = tempo_coluna.apply(
+        lambda x: x / 100 if pd.notnull(x) and x > 100 else x
+)
+
+    df_respostas = df_respostas.copy()
+    df_respostas["tempo_resposta_segundos"] = tempo_coluna
 
     tempo_medio = (
         df_respostas
