@@ -20,25 +20,33 @@ SCOPES = [
 # GOOGLE SHEETS
 # =========================
 
-creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=SCOPES
-)
+@st.cache_resource
+def conectar_planilha():
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=SCOPES
+    )
 
-client = gspread.authorize(creds)
+    client = gspread.authorize(creds)
 
-sheet = client.open_by_key(
-    st.secrets["sheets"]["sheet_id"]
-).sheet1
+    sheet = client.open_by_key(
+        st.secrets["sheets"]["sheet_id"]
+    ).sheet1
+
+    return sheet
 
 
+@st.cache_data(ttl=60)
 def carregar_dados():
+    sheet = conectar_planilha()
     dados = sheet.get_all_records()
     return pd.DataFrame(dados)
 
 
 def salvar_resposta(nova_resposta):
-    sheet.append_row(nova_resposta)
+    sheet = conectar_planilha()
+    sheet.append_row(nova_resposta, value_input_option="USER_ENTERED")
+    carregar_dados.clear()
 
 
 # =========================
@@ -129,12 +137,17 @@ semana_ano = f"{agora.year}-{agora.isocalendar().week}"
 # CARREGAR DADOS
 # =========================
 
-df_respostas = carregar_dados()
+try:
+    df_respostas = carregar_dados()
+except Exception:
+    st.error("Não foi possível carregar os dados da planilha neste momento.")
+    df_respostas = pd.DataFrame()
+
 # =========================
 # CONTADOR GLOBAL
 # =========================
 
-if not df_respostas.empty:
+if not df_respostas.empty and "user_id" in df_respostas.columns:
     total_respostas_global = len(df_respostas)
     total_participantes_global = df_respostas["user_id"].nunique()
 else:
@@ -363,29 +376,119 @@ else:
         st.rerun()
 
 # =========================
-# RESUMO DO DATASET
+# DASHBOARD
 # =========================
 
 st.divider()
 
-st.subheader("Resumo parcial do experimento")
+st.subheader("Resultados em tempo real")
 
-df = carregar_dados()
+if df_respostas.empty:
+    st.write("Ainda não há respostas coletadas.")
+else:
+    if "timestamp" in df_respostas.columns:
+        ultima_atualizacao = df_respostas["timestamp"].max()
+        st.caption(f"Última resposta registrada: {ultima_atualizacao}")
 
-if not df.empty:
-    st.write(f"Total de respostas coletadas: **{len(df)}**")
-    st.write(f"Total de usuários anônimos: **{df['user_id'].nunique()}**")
+    if "tipo_experimento" in df_respostas.columns:
+        st.write("Respostas por experimento")
 
-    if "tipo_experimento" in df.columns and "resposta" in df.columns:
-        st.write("Respostas por tipo de experimento:")
-        st.dataframe(
-            df.groupby(["tipo_experimento", "resposta"])
-            .size()
-            .reset_index(name="quantidade")
+        respostas_por_experimento = (
+            df_respostas["tipo_experimento"]
+            .value_counts()
+            .reset_index()
         )
 
-    with st.expander("Visualizar dados coletados"):
-        st.dataframe(df)
+        respostas_por_experimento.columns = [
+            "tipo_experimento",
+            "quantidade"
+        ]
 
-else:
-    st.write("Ainda não há respostas coletadas.")
+        st.bar_chart(
+            respostas_por_experimento.set_index("tipo_experimento")
+        )
+
+    st.divider()
+
+    st.write("Distribuição por experimento")
+
+    experimentos_disponiveis = sorted(
+        df_respostas["tipo_experimento"].dropna().unique()
+    )
+
+    experimento_dashboard = st.selectbox(
+        "Selecione um experimento para visualizar",
+        experimentos_disponiveis
+    )
+
+    df_experimento = df_respostas[
+        df_respostas["tipo_experimento"] == experimento_dashboard
+    ]
+
+    contagem_respostas = (
+        df_experimento["resposta"]
+        .value_counts()
+        .reset_index()
+    )
+
+    contagem_respostas.columns = [
+        "resposta",
+        "quantidade"
+    ]
+
+    if experimento_dashboard == "numero_0_100":
+        contagem_respostas["resposta"] = pd.to_numeric(
+            contagem_respostas["resposta"],
+            errors="coerce"
+        )
+
+        contagem_respostas = contagem_respostas.sort_values("resposta")
+
+    else:
+        contagem_respostas = contagem_respostas.sort_values(
+            "quantidade",
+            ascending=False
+        )
+
+    st.bar_chart(
+        contagem_respostas.set_index("resposta")
+    )
+
+    st.write("Tabela de frequência")
+
+    total_experimento = contagem_respostas["quantidade"].sum()
+
+    contagem_respostas["percentual"] = (
+        contagem_respostas["quantidade"] / total_experimento * 100
+    ).round(2)
+
+    st.dataframe(contagem_respostas)
+
+    st.divider()
+
+    st.write("Tempo médio de resposta por experimento")
+
+    if "tempo_resposta_segundos" in df_respostas.columns:
+        df_respostas["tempo_resposta_segundos"] = pd.to_numeric(
+            df_respostas["tempo_resposta_segundos"],
+            errors="coerce"
+        )
+
+        tempo_medio = (
+            df_respostas
+            .groupby("tipo_experimento")["tempo_resposta_segundos"]
+            .mean()
+            .round(2)
+            .reset_index()
+        )
+
+        tempo_medio.columns = [
+            "tipo_experimento",
+            "tempo_medio_segundos"
+        ]
+
+        st.bar_chart(
+            tempo_medio.set_index("tipo_experimento")
+        )
+
+        st.dataframe(tempo_medio)
