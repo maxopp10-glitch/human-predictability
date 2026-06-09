@@ -66,12 +66,8 @@ if not cookies.ready():
 # =========================
 
 st.title("Human Predictability")
-
 st.subheader("Experimentos de escolhas simples")
-
-st.write(
-    "Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo."
-)
+st.write("Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo.")
 
 # =========================
 # ID ANÔNIMO
@@ -105,11 +101,7 @@ if idade_cookie is None or sexo_cookie is None:
 
     sexo = st.selectbox(
         "Sexo (opcional)",
-        [
-            "Prefiro não informar",
-            "Masculino",
-            "Feminino"
-        ]
+        ["Prefiro não informar", "Masculino", "Feminino"]
     )
 
     if st.button("Salvar dados iniciais"):
@@ -157,16 +149,10 @@ else:
 col1, col2 = st.columns(2)
 
 with col1:
-    st.metric(
-        label="Participantes",
-        value=total_participantes_global
-    )
+    st.metric(label="Participantes", value=total_participantes_global)
 
 with col2:
-    st.metric(
-        label="Respostas",
-        value=total_respostas_global
-    )
+    st.metric(label="Respostas", value=total_respostas_global)
 
 # =========================
 # FUNÇÃO DE LIMITE SEMANAL
@@ -284,33 +270,14 @@ else:
 
     elif experimento == "cor":
         st.write("Escolha rapidamente uma cor.")
-
-        resposta = st.selectbox(
-            "Qual cor você escolheu?",
-            [
-                "Azul",
-                "Vermelho",
-                "Verde",
-                "Amarelo",
-                "Preto",
-                "Branco"
-            ]
-        )
+        resposta = st.selectbox("Qual cor você escolheu?", ["Azul", "Vermelho", "Verde", "Amarelo", "Preto", "Branco"])
 
     elif experimento == "cara_coroa":
         st.write("Escolha rapidamente uma opção.")
-
-        resposta = st.selectbox(
-            "Cara ou coroa?",
-            [
-                "Cara",
-                "Coroa"
-            ]
-        )
+        resposta = st.selectbox("Cara ou coroa?", ["Cara", "Coroa"])
 
     elif experimento == "letra":
         st.write("Escolha rapidamente uma letra.")
-
         resposta = st.selectbox(
             "Qual letra você escolheu?",
             [
@@ -323,45 +290,20 @@ else:
 
     elif experimento == "direcao":
         st.write("Escolha rapidamente uma direção.")
-
-        resposta = st.selectbox(
-            "Qual direção você escolheu?",
-            [
-                "Norte",
-                "Sul",
-                "Leste",
-                "Oeste"
-            ]
-        )
+        resposta = st.selectbox("Qual direção você escolheu?", ["Norte", "Sul", "Leste", "Oeste"])
 
     elif experimento == "forma_geometrica":
         st.write("Escolha rapidamente uma forma geométrica.")
-
         resposta = st.selectbox(
             "Qual forma você escolheu?",
-            [
-                "Circulo",
-                "Quadrado",
-                "Triangulo",
-                "Retangulo",
-                "Estrela",
-                "Losango"
-            ]
+            ["Circulo", "Quadrado", "Triangulo", "Retangulo", "Estrela", "Losango"]
         )
 
     elif experimento == "animal":
         st.write("Escolha rapidamente um animal.")
-
         resposta = st.selectbox(
             "Qual animal você escolheu?",
-            [
-                "Cachorro",
-                "Gato",
-                "Leao",
-                "Lobo",
-                "Aguia",
-                "Golfinho"
-            ]
+            ["Cachorro", "Gato", "Leao", "Lobo", "Aguia", "Golfinho"]
         )
 
     if st.button("Enviar resposta", disabled=not resposta_valida):
@@ -398,7 +340,6 @@ else:
 # =========================
 
 st.divider()
-
 st.subheader("Resultados em tempo real")
 
 colunas_dashboard = [
@@ -432,6 +373,10 @@ else:
     ultima_atualizacao = df_respostas["timestamp"].max()
     st.caption(f"Última resposta registrada: {ultima_atualizacao}")
 
+    # =========================
+    # RESPOSTAS POR EXPERIMENTO
+    # =========================
+
     st.write("Respostas por experimento")
 
     respostas_por_experimento = (
@@ -450,6 +395,10 @@ else:
     )
 
     st.divider()
+
+    # =========================
+    # DISTRIBUIÇÃO POR EXPERIMENTO
+    # =========================
 
     st.write("Distribuição por experimento")
 
@@ -504,9 +453,12 @@ else:
     ).round(2)
 
     st.dataframe(contagem_respostas)
-    
-    st.divider()
 
+    # =========================
+    # RESPOSTA DOMINANTE
+    # =========================
+
+    st.divider()
     st.write("Resposta mais frequente")
 
     resposta_dominante = contagem_respostas.iloc[0]
@@ -516,38 +468,96 @@ else:
         / contagem_respostas["quantidade"].sum()
         * 100,
         2
-)
+    )
 
     st.metric(
         label="Resposta dominante",
         value=str(resposta_dominante["resposta"])
-)
+    )
 
     st.metric(
         label="Índice de previsibilidade (%)",
         value=percentual_dominante
-)
+    )
+
+    # =========================
+    # RANKING DE PREVISIBILIDADE
+    # =========================
 
     st.divider()
+    st.subheader("Ranking de previsibilidade")
 
+    ranking_previsibilidade = []
+
+    for experimento in sorted(df_respostas["tipo_experimento"].dropna().unique()):
+
+        df_exp = df_respostas[
+            df_respostas["tipo_experimento"] == experimento
+        ]
+
+        contagem = (
+            df_exp["resposta"]
+            .value_counts()
+            .reset_index()
+        )
+
+        contagem.columns = [
+            "resposta",
+            "quantidade"
+        ]
+
+        resposta_dominante_exp = contagem.iloc[0]["resposta"]
+
+        percentual_exp = round(
+            contagem.iloc[0]["quantidade"]
+            / contagem["quantidade"].sum()
+            * 100,
+            2
+        )
+
+        ranking_previsibilidade.append({
+            "tipo_experimento": experimento,
+            "resposta_dominante": resposta_dominante_exp,
+            "previsibilidade_%": percentual_exp
+        })
+
+    ranking_df = pd.DataFrame(ranking_previsibilidade)
+
+    ranking_df = ranking_df.sort_values(
+        by="previsibilidade_%",
+        ascending=False
+    )
+
+    st.dataframe(
+        ranking_df,
+        use_container_width=True
+    )
+
+    st.bar_chart(
+        ranking_df.set_index("tipo_experimento")["previsibilidade_%"]
+    )
+
+    # =========================
+    # TEMPO MÉDIO
+    # =========================
+
+    st.divider()
     st.write("Tempo médio de resposta por experimento")
 
-    
     tempo_coluna = (
         df_respostas["tempo_resposta_segundos"]
         .astype(str)
         .str.replace(",", ".", regex=False)
-)
+    )
 
     tempo_coluna = pd.to_numeric(
         tempo_coluna,
         errors="coerce"
     ).astype(float)
 
-    
     tempo_coluna = tempo_coluna.apply(
         lambda x: x / 100 if pd.notnull(x) and x > 30 else x
-)
+    )
 
     df_respostas = df_respostas.copy()
     df_respostas["tempo_resposta_segundos"] = tempo_coluna
