@@ -504,6 +504,29 @@ else:
     ).round(2)
 
     st.dataframe(contagem_respostas)
+    
+    st.divider()
+
+    st.write("Resposta mais frequente")
+
+    resposta_dominante = contagem_respostas.iloc[0]
+
+    percentual_dominante = round(
+        resposta_dominante["quantidade"]
+        / contagem_respostas["quantidade"].sum()
+        * 100,
+        2
+)
+
+    st.metric(
+        label="Resposta dominante",
+        value=str(resposta_dominante["resposta"])
+)
+
+    st.metric(
+        label="Índice de previsibilidade (%)",
+        value=percentual_dominante
+)
 
     st.divider()
 
