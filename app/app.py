@@ -521,8 +521,9 @@ else:
         errors="coerce"
     ).astype(float)
 
+    
     tempo_coluna = tempo_coluna.apply(
-        lambda x: x / 100 if pd.notnull(x) and x > 100 else x
+        lambda x: x / 100 if pd.notnull(x) and x > 30 else x
 )
 
     df_respostas = df_respostas.copy()
