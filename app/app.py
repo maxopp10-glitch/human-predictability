@@ -401,30 +401,53 @@ st.divider()
 
 st.subheader("Resultados em tempo real")
 
+colunas_dashboard = [
+    "user_id",
+    "idade",
+    "sexo",
+    "tipo_experimento",
+    "resposta",
+    "timestamp",
+    "hora",
+    "dia_semana",
+    "semana_ano",
+    "tempo_resposta_segundos"
+]
+
 if df_respostas.empty:
     st.write("Ainda não há respostas coletadas.")
+
+elif not all(col in df_respostas.columns for col in colunas_dashboard):
+    st.warning(
+        "A planilha ainda não possui todas as colunas esperadas para exibir o dashboard."
+    )
+
+    st.write("Colunas esperadas:")
+    st.write(colunas_dashboard)
+
+    st.write("Colunas encontradas:")
+    st.write(list(df_respostas.columns))
+
 else:
-    if "timestamp" in df_respostas.columns:
-        ultima_atualizacao = df_respostas["timestamp"].max()
-        st.caption(f"Última resposta registrada: {ultima_atualizacao}")
+    ultima_atualizacao = df_respostas["timestamp"].max()
+    st.caption(f"Última resposta registrada: {ultima_atualizacao}")
 
-    if "tipo_experimento" in df_respostas.columns:
-        st.write("Respostas por experimento")
+    st.write("Respostas por experimento")
 
-        respostas_por_experimento = (
-            df_respostas["tipo_experimento"]
-            .value_counts()
-            .reset_index()
-        )
+    respostas_por_experimento = (
+        df_respostas["tipo_experimento"]
+        .value_counts()
+        .reset_index()
+    )
 
-        respostas_por_experimento.columns = [
-            "tipo_experimento",
-            "quantidade"
-        ]
+    respostas_por_experimento.columns = [
+        "tipo_experimento",
+        "quantidade"
+    ]
 
-        st.bar_chart(
-            respostas_por_experimento.set_index("tipo_experimento")
-        )
+    st.bar_chart(
+        respostas_por_experimento.set_index("tipo_experimento")
+    )
 
     st.divider()
 
@@ -486,27 +509,32 @@ else:
 
     st.write("Tempo médio de resposta por experimento")
 
-    if "tempo_resposta_segundos" in df_respostas.columns:
-        df_respostas["tempo_resposta_segundos"] = pd.to_numeric(
-            df_respostas["tempo_resposta_segundos"],
-            errors="coerce"
-        )
+    df_respostas["tempo_resposta_segundos"] = (
+        df_respostas["tempo_resposta_segundos"]
+        .astype(str)
+        .str.replace(",", ".", regex=False)
+    )
 
-        tempo_medio = (
-            df_respostas
-            .groupby("tipo_experimento")["tempo_resposta_segundos"]
-            .mean()
-            .round(2)
-            .reset_index()
-        )
+    df_respostas["tempo_resposta_segundos"] = pd.to_numeric(
+        df_respostas["tempo_resposta_segundos"],
+        errors="coerce"
+    )
 
-        tempo_medio.columns = [
-            "tipo_experimento",
-            "tempo_medio_segundos"
-        ]
+    tempo_medio = (
+        df_respostas
+        .groupby("tipo_experimento")["tempo_resposta_segundos"]
+        .mean()
+        .round(2)
+        .reset_index()
+    )
 
-        st.bar_chart(
-            tempo_medio.set_index("tipo_experimento")
-        )
+    tempo_medio.columns = [
+        "tipo_experimento",
+        "tempo_medio_segundos"
+    ]
 
-        st.dataframe(tempo_medio)
+    st.bar_chart(
+        tempo_medio.set_index("tipo_experimento")
+    )
+
+    st.dataframe(tempo_medio)
