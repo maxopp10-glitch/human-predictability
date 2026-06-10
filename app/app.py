@@ -538,6 +538,94 @@ else:
     )
 
     # =========================
+    # TENDÊNCIA TEMPORAL
+    # =========================
+
+    st.divider()
+    st.subheader("Tendência temporal")
+
+    st.write("Respostas por semana")
+
+    respostas_por_semana = (
+        df_respostas
+        .groupby("semana_ano")
+        .size()
+        .reset_index(name="quantidade")
+        .sort_values("semana_ano")
+    )
+
+    st.bar_chart(
+        respostas_por_semana.set_index("semana_ano")
+    )
+
+    st.dataframe(
+        respostas_por_semana,
+        use_container_width=True
+    )
+
+    st.write("Participantes por semana")
+
+    participantes_por_semana = (
+        df_respostas
+        .groupby("semana_ano")["user_id"]
+        .nunique()
+        .reset_index(name="participantes_unicos")
+        .sort_values("semana_ano")
+    )
+
+    st.bar_chart(
+        participantes_por_semana.set_index("semana_ano")
+    )
+
+    st.dataframe(
+        participantes_por_semana,
+        use_container_width=True
+    )
+
+    st.write("Resposta dominante por semana")
+
+    dominante_por_semana = []
+
+    for semana in sorted(df_respostas["semana_ano"].dropna().unique()):
+
+        df_semana = df_respostas[
+            df_respostas["semana_ano"] == semana
+        ]
+
+        contagem_semana = (
+            df_semana["resposta"]
+            .value_counts()
+            .reset_index()
+        )
+
+        contagem_semana.columns = [
+            "resposta",
+            "quantidade"
+        ]
+
+        resposta_dominante_semana = contagem_semana.iloc[0]["resposta"]
+
+        percentual_semana = round(
+            contagem_semana.iloc[0]["quantidade"]
+            / contagem_semana["quantidade"].sum()
+            * 100,
+            2
+        )
+
+        dominante_por_semana.append({
+            "semana_ano": semana,
+            "resposta_dominante": resposta_dominante_semana,
+            "previsibilidade_%": percentual_semana
+        })
+
+    dominante_semana_df = pd.DataFrame(dominante_por_semana)
+
+    st.dataframe(
+        dominante_semana_df,
+        use_container_width=True
+    )
+
+    # =========================
     # TEMPO MÉDIO
     # =========================
 
