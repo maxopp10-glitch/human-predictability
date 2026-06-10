@@ -6,19 +6,27 @@ from streamlit_cookies_manager import EncryptedCookieManager
 import gspread
 from google.oauth2.service_account import Credentials
 
-# =========================
-# CONFIGURAÇÕES
-# =========================
-
 MAX_RESPOSTAS_SEMANA = 3
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets"
 ]
 
-# =========================
-# GOOGLE SHEETS
-# =========================
+EXPERIMENTOS = [
+    "numero_0_100",
+    "numero_1_10",
+    "cor",
+    "cara_coroa",
+    "direcao",
+    "forma_geometrica",
+    "animal",
+    "carta_baralho",
+    "mes_ano",
+    "estacao",
+    "emoji",
+    "clima"
+]
+
 
 @st.cache_resource
 def conectar_planilha():
@@ -49,10 +57,6 @@ def salvar_resposta(nova_resposta):
     carregar_dados.clear()
 
 
-# =========================
-# COOKIES
-# =========================
-
 cookies = EncryptedCookieManager(
     prefix="human_predictability/",
     password="projeto_ml_max_2026"
@@ -61,17 +65,9 @@ cookies = EncryptedCookieManager(
 if not cookies.ready():
     st.stop()
 
-# =========================
-# CABEÇALHO
-# =========================
-
 st.title("Human Predictability")
 st.subheader("Experimentos de escolhas simples")
 st.write("Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo.")
-
-# =========================
-# ID ANÔNIMO
-# =========================
 
 user_id = cookies.get("user_id")
 
@@ -81,10 +77,6 @@ if user_id is None:
     cookies.save()
 
 st.info(f"Seu ID anônimo é: {user_id}")
-
-# =========================
-# PERFIL DO PARTICIPANTE
-# =========================
 
 idade_cookie = cookies.get("idade")
 sexo_cookie = cookies.get("sexo")
@@ -118,16 +110,9 @@ else:
     idade = int(idade_cookie)
     sexo = sexo_cookie
 
-# =========================
-# SEMANA ATUAL
-# =========================
 
 agora = datetime.now()
 semana_ano = f"{agora.year}-{agora.isocalendar().week}"
-
-# =========================
-# CARREGAR DADOS
-# =========================
 
 try:
     df_respostas = carregar_dados()
@@ -135,9 +120,6 @@ except Exception:
     st.error("Não foi possível carregar os dados da planilha neste momento.")
     df_respostas = pd.DataFrame()
 
-# =========================
-# CONTADOR GLOBAL
-# =========================
 
 if not df_respostas.empty and "user_id" in df_respostas.columns:
     total_respostas_global = len(df_respostas)
@@ -154,9 +136,6 @@ with col1:
 with col2:
     st.metric(label="Respostas", value=total_respostas_global)
 
-# =========================
-# FUNÇÃO DE LIMITE SEMANAL
-# =========================
 
 def contar_respostas_semanais(df, user_id, semana_ano, experimento):
     if df.empty:
@@ -175,9 +154,6 @@ def contar_respostas_semanais(df, user_id, semana_ano, experimento):
 
     return len(respostas_filtradas)
 
-# =========================
-# CONTROLE DO EXPERIMENTO
-# =========================
 
 if "experimento_iniciado" not in st.session_state:
     st.session_state.experimento_iniciado = False
@@ -188,24 +164,13 @@ if "start_time" not in st.session_state:
 if "experimento_atual" not in st.session_state:
     st.session_state.experimento_atual = None
 
-# =========================
-# FORMULÁRIO DO EXPERIMENTO
-# =========================
 
 if not st.session_state.experimento_iniciado:
     st.subheader("Escolha o experimento")
 
     experimento = st.selectbox(
         "Experimento",
-        [
-            "numero_0_100",
-            "cor",
-            "cara_coroa",
-            "letra",
-            "direcao",
-            "forma_geometrica",
-            "animal"
-        ]
+        EXPERIMENTOS
     )
 
     total_respostas_semana = contar_respostas_semanais(
@@ -253,7 +218,6 @@ else:
         if numero_digitado.strip() == "":
             resposta_valida = False
             st.info("Digite um número para enviar sua resposta.")
-
         else:
             try:
                 numero_convertido = int(numero_digitado)
@@ -268,29 +232,51 @@ else:
                 resposta_valida = False
                 st.warning("Digite apenas números inteiros, sem letras ou símbolos.")
 
+    elif experimento == "numero_1_10":
+        st.write("Escolha rapidamente um número de 1 a 10.")
+
+        numero_digitado = st.text_input(
+            "Qual número você escolheu?",
+            placeholder="Digite um número entre 1 e 10"
+        )
+
+        if numero_digitado.strip() == "":
+            resposta_valida = False
+            st.info("Digite um número para enviar sua resposta.")
+        else:
+            try:
+                numero_convertido = int(numero_digitado)
+
+                if 1 <= numero_convertido <= 10:
+                    resposta = numero_convertido
+                else:
+                    resposta_valida = False
+                    st.warning("O número precisa estar entre 1 e 10.")
+
+            except ValueError:
+                resposta_valida = False
+                st.warning("Digite apenas números inteiros, sem letras ou símbolos.")
+
     elif experimento == "cor":
         st.write("Escolha rapidamente uma cor.")
-        resposta = st.selectbox("Qual cor você escolheu?", ["Azul", "Vermelho", "Verde", "Amarelo", "Preto", "Branco"])
+        resposta = st.selectbox(
+            "Qual cor você escolheu?",
+            ["Azul", "Vermelho", "Verde", "Amarelo", "Preto", "Branco"]
+        )
 
     elif experimento == "cara_coroa":
         st.write("Escolha rapidamente uma opção.")
-        resposta = st.selectbox("Cara ou coroa?", ["Cara", "Coroa"])
-
-    elif experimento == "letra":
-        st.write("Escolha rapidamente uma letra.")
         resposta = st.selectbox(
-            "Qual letra você escolheu?",
-            [
-                "A", "B", "C", "D", "E", "F", "G",
-                "H", "I", "J", "K", "L", "M", "N",
-                "O", "P", "Q", "R", "S", "T", "U",
-                "V", "W", "X", "Y", "Z"
-            ]
+            "Cara ou coroa?",
+            ["Cara", "Coroa"]
         )
 
     elif experimento == "direcao":
         st.write("Escolha rapidamente uma direção.")
-        resposta = st.selectbox("Qual direção você escolheu?", ["Norte", "Sul", "Leste", "Oeste"])
+        resposta = st.selectbox(
+            "Qual direção você escolheu?",
+            ["Norte", "Sul", "Leste", "Oeste"]
+        )
 
     elif experimento == "forma_geometrica":
         st.write("Escolha rapidamente uma forma geométrica.")
@@ -304,6 +290,93 @@ else:
         resposta = st.selectbox(
             "Qual animal você escolheu?",
             ["Cachorro", "Gato", "Leao", "Lobo", "Aguia", "Golfinho"]
+        )
+
+    elif experimento == "carta_baralho":
+        st.write("Escolha rapidamente uma carta de baralho.")
+
+        resposta = st.selectbox(
+            "Qual carta você escolheu?",
+            [
+                "A de Copas", "2 de Copas", "3 de Copas", "4 de Copas", "5 de Copas",
+                "6 de Copas", "7 de Copas", "8 de Copas", "9 de Copas", "10 de Copas",
+                "J de Copas", "Q de Copas", "K de Copas",
+                "A de Espadas", "2 de Espadas", "3 de Espadas", "4 de Espadas", "5 de Espadas",
+                "6 de Espadas", "7 de Espadas", "8 de Espadas", "9 de Espadas", "10 de Espadas",
+                "J de Espadas", "Q de Espadas", "K de Espadas",
+                "A de Ouros", "2 de Ouros", "3 de Ouros", "4 de Ouros", "5 de Ouros",
+                "6 de Ouros", "7 de Ouros", "8 de Ouros", "9 de Ouros", "10 de Ouros",
+                "J de Ouros", "Q de Ouros", "K de Ouros",
+                "A de Paus", "2 de Paus", "3 de Paus", "4 de Paus", "5 de Paus",
+                "6 de Paus", "7 de Paus", "8 de Paus", "9 de Paus", "10 de Paus",
+                "J de Paus", "Q de Paus", "K de Paus"
+            ]
+        )
+
+    elif experimento == "mes_ano":
+        st.write("Escolha rapidamente um mês do ano.")
+
+        resposta = st.selectbox(
+            "Qual mês você escolheu?",
+            [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abril",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ]
+        )
+
+    elif experimento == "estacao":
+        st.write("Escolha rapidamente uma estação do ano.")
+
+        resposta = st.selectbox(
+            "Qual estação você escolheu?",
+            [
+                "Verão",
+                "Outono",
+                "Inverno",
+                "Primavera"
+            ]
+        )
+
+    elif experimento == "emoji":
+        st.write("Escolha rapidamente um emoji.")
+
+        resposta = st.selectbox(
+            "Qual emoji você escolheu?",
+            [
+                "😀",
+                "😂",
+                "😎",
+                "😍",
+                "😢",
+                "😡",
+                "🔥",
+                "❤️"
+            ]
+        )
+
+    elif experimento == "clima":
+        st.write("Escolha rapidamente um tipo de clima.")
+
+        resposta = st.selectbox(
+            "Qual clima você escolheu?",
+            [
+                "Sol",
+                "Chuva",
+                "Nublado",
+                "Neve",
+                "Tempestade",
+                "Vento"
+            ]
         )
 
     if st.button("Enviar resposta", disabled=not resposta_valida):
@@ -335,9 +408,6 @@ else:
         st.success("Resposta registrada com sucesso!")
         st.rerun()
 
-# =========================
-# DASHBOARD
-# =========================
 
 st.divider()
 st.subheader("Resultados em tempo real")
@@ -373,10 +443,6 @@ else:
     ultima_atualizacao = df_respostas["timestamp"].max()
     st.caption(f"Última resposta registrada: {ultima_atualizacao}")
 
-    # =========================
-    # RESPOSTAS POR EXPERIMENTO
-    # =========================
-
     st.write("Respostas por experimento")
 
     respostas_por_experimento = (
@@ -395,10 +461,6 @@ else:
     )
 
     st.divider()
-
-    # =========================
-    # DISTRIBUIÇÃO POR EXPERIMENTO
-    # =========================
 
     st.write("Distribuição por experimento")
 
@@ -426,7 +488,7 @@ else:
         "quantidade"
     ]
 
-    if experimento_dashboard == "numero_0_100":
+    if experimento_dashboard in ["numero_0_100", "numero_1_10"]:
         contagem_respostas["resposta"] = pd.to_numeric(
             contagem_respostas["resposta"],
             errors="coerce"
@@ -454,10 +516,6 @@ else:
 
     st.dataframe(contagem_respostas)
 
-    # =========================
-    # RESPOSTA DOMINANTE
-    # =========================
-
     st.divider()
     st.write("Resposta mais frequente")
 
@@ -479,10 +537,6 @@ else:
         label="Índice de previsibilidade (%)",
         value=percentual_dominante
     )
-
-    # =========================
-    # RANKING DE PREVISIBILIDADE
-    # =========================
 
     st.divider()
     st.subheader("Ranking de previsibilidade")
@@ -536,10 +590,6 @@ else:
     st.bar_chart(
         ranking_df.set_index("tipo_experimento")["previsibilidade_%"]
     )
-
-    # =========================
-    # TENDÊNCIA TEMPORAL
-    # =========================
 
     st.divider()
     st.subheader("Tendência temporal")
@@ -624,10 +674,6 @@ else:
         dominante_semana_df,
         use_container_width=True
     )
-
-    # =========================
-    # TEMPO MÉDIO
-    # =========================
 
     st.divider()
     st.write("Tempo médio de resposta por experimento")
