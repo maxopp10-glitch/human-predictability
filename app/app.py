@@ -8,9 +8,7 @@ from google.oauth2.service_account import Credentials
 
 MAX_RESPOSTAS_SEMANA = 3
 
-SCOPES = [
-    "https://www.googleapis.com/auth/spreadsheets"
-]
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 EXPERIMENTOS = [
     "numero_0_100",
@@ -34,14 +32,8 @@ def conectar_planilha():
         st.secrets["gcp_service_account"],
         scopes=SCOPES
     )
-
     client = gspread.authorize(creds)
-
-    sheet = client.open_by_key(
-        st.secrets["sheets"]["sheet_id"]
-    ).sheet1
-
-    return sheet
+    return client.open_by_key(st.secrets["sheets"]["sheet_id"]).sheet1
 
 
 @st.cache_data(ttl=60)
@@ -100,7 +92,6 @@ if idade_cookie is None or sexo_cookie is None:
         cookies["idade"] = str(idade)
         cookies["sexo"] = sexo
         cookies.save()
-
         st.success("Dados iniciais salvos com sucesso!")
         st.rerun()
 
@@ -168,10 +159,7 @@ if "experimento_atual" not in st.session_state:
 if not st.session_state.experimento_iniciado:
     st.subheader("Escolha o experimento")
 
-    experimento = st.selectbox(
-        "Experimento",
-        EXPERIMENTOS
-    )
+    experimento = st.selectbox("Experimento", EXPERIMENTOS)
 
     total_respostas_semana = contar_respostas_semanais(
         df_respostas,
@@ -195,7 +183,6 @@ if not st.session_state.experimento_iniciado:
             st.session_state.start_time = datetime.now()
             st.session_state.experimento_atual = experimento
             st.rerun()
-
     else:
         st.warning(
             "Você atingiu o limite semanal para este experimento. "
@@ -295,106 +282,47 @@ else:
     elif experimento == "carta_baralho":
         st.write("Escolha rapidamente uma carta de baralho.")
 
-        elif experimento == "carta_baralho":
-        st.write("Escolha rapidamente uma carta de baralho.")
-
         naipe = st.selectbox(
             "Escolha o naipe:",
-            [
-                "Copas",
-                "Espadas",
-                "Ouros",
-                "Paus"
-            ]
+            ["Copas", "Espadas", "Ouros", "Paus"]
         )
 
         carta = st.selectbox(
             "Escolha a carta:",
-            [
-                "A",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "J",
-                "Q",
-                "K"
-            ]
+            ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
         )
 
         resposta = f"{carta} de {naipe}"
 
-
-
     elif experimento == "mes_ano":
         st.write("Escolha rapidamente um mês do ano.")
-
         resposta = st.selectbox(
             "Qual mês você escolheu?",
             [
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro"
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
             ]
         )
 
     elif experimento == "estacao":
         st.write("Escolha rapidamente uma estação do ano.")
-
         resposta = st.selectbox(
             "Qual estação você escolheu?",
-            [
-                "Verão",
-                "Outono",
-                "Inverno",
-                "Primavera"
-            ]
+            ["Verão", "Outono", "Inverno", "Primavera"]
         )
 
     elif experimento == "emoji":
         st.write("Escolha rapidamente um emoji.")
-
         resposta = st.selectbox(
             "Qual emoji você escolheu?",
-            [
-                "😀",
-                "😂",
-                "😎",
-                "😍",
-                "😢",
-                "😡",
-                "🔥",
-                "❤️"
-            ]
+            ["😀", "😂", "😎", "😍", "😢", "😡", "🔥", "❤️"]
         )
 
     elif experimento == "clima":
         st.write("Escolha rapidamente um tipo de clima.")
-
         resposta = st.selectbox(
             "Qual clima você escolheu?",
-            [
-                "Sol",
-                "Chuva",
-                "Nublado",
-                "Neve",
-                "Tempestade",
-                "Vento"
-            ]
+            ["Sol", "Chuva", "Nublado", "Neve", "Tempestade", "Vento"]
         )
 
     if st.button("Enviar resposta", disabled=not resposta_valida):
@@ -513,7 +441,6 @@ else:
         )
 
         contagem_respostas = contagem_respostas.sort_values("resposta")
-
     else:
         contagem_respostas = contagem_respostas.sort_values(
             "quantidade",
@@ -562,7 +489,6 @@ else:
     ranking_previsibilidade = []
 
     for experimento in sorted(df_respostas["tipo_experimento"].dropna().unique()):
-
         df_exp = df_respostas[
             df_respostas["tipo_experimento"] == experimento
         ]
@@ -655,7 +581,6 @@ else:
     dominante_por_semana = []
 
     for semana in sorted(df_respostas["semana_ano"].dropna().unique()):
-
         df_semana = df_respostas[
             df_respostas["semana_ano"] == semana
         ]
