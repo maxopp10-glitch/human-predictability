@@ -25,6 +25,240 @@ EXPERIMENTOS = [
     "clima"
 ]
 
+TEXTOS = {
+    "Português": {
+        "title": "Human Predictability",
+        "subtitle": "Experimentos de escolhas simples",
+        "objective": "Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo.",
+        "anonymous_id": "Seu ID anônimo é:",
+        "initial_data": "Dados iniciais",
+        "age": "Qual sua idade?",
+        "sex": "Sexo (opcional)",
+        "save_initial": "Salvar dados iniciais",
+        "saved": "Dados iniciais salvos com sucesso!",
+        "choose_experiment": "Escolha o experimento",
+        "experiment": "Experimento",
+        "weekly_answers": "Respostas nesta semana para este experimento:",
+        "ready": "Quando estiver pronto, clique para iniciar o experimento.",
+        "start": "Iniciar experimento",
+        "limit": "Você atingiu o limite semanal para este experimento. Escolha outro experimento ou volte na próxima semana.",
+        "submit": "Enviar resposta",
+        "registered": "Resposta registrada com sucesso!",
+        "results": "Resultados em tempo real",
+        "latest": "Última resposta registrada:",
+        "answers_by_experiment": "Respostas por experimento",
+        "distribution": "Distribuição por experimento",
+        "select_exp": "Selecione um experimento para visualizar",
+        "frequency": "Tabela de frequência",
+        "dominant": "Resposta mais frequente",
+        "dominant_answer": "Resposta dominante",
+        "predictability": "Índice de previsibilidade (%)",
+        "ranking": "Ranking de previsibilidade",
+        "trend": "Tendência temporal",
+        "answers_week": "Respostas por semana",
+        "participants_week": "Participantes por semana",
+        "dominant_week": "Resposta dominante por semana",
+        "avg_time": "Tempo médio de resposta por experimento"
+    },
+    "English": {
+        "title": "Human Predictability",
+        "subtitle": "Simple choice experiments",
+        "objective": "Goal: study whether simple human choices show predictable patterns over time.",
+        "anonymous_id": "Your anonymous ID is:",
+        "initial_data": "Initial data",
+        "age": "How old are you?",
+        "sex": "Sex (optional)",
+        "save_initial": "Save initial data",
+        "saved": "Initial data saved successfully!",
+        "choose_experiment": "Choose the experiment",
+        "experiment": "Experiment",
+        "weekly_answers": "Answers this week for this experiment:",
+        "ready": "When you are ready, click to start the experiment.",
+        "start": "Start experiment",
+        "limit": "You reached the weekly limit for this experiment. Choose another experiment or come back next week.",
+        "submit": "Submit answer",
+        "registered": "Answer registered successfully!",
+        "results": "Real-time results",
+        "latest": "Latest registered answer:",
+        "answers_by_experiment": "Answers by experiment",
+        "distribution": "Distribution by experiment",
+        "select_exp": "Select an experiment to view",
+        "frequency": "Frequency table",
+        "dominant": "Most frequent answer",
+        "dominant_answer": "Dominant answer",
+        "predictability": "Predictability index (%)",
+        "ranking": "Predictability ranking",
+        "trend": "Temporal trend",
+        "answers_week": "Answers per week",
+        "participants_week": "Participants per week",
+        "dominant_week": "Dominant answer per week",
+        "avg_time": "Average response time by experiment"
+    },
+    "Español": {
+        "title": "Human Predictability",
+        "subtitle": "Experimentos de elecciones simples",
+        "objective": "Objetivo: estudiar si las elecciones humanas simples presentan patrones previsibles a lo largo del tiempo.",
+        "anonymous_id": "Tu ID anónimo es:",
+        "initial_data": "Datos iniciales",
+        "age": "¿Cuál es tu edad?",
+        "sex": "Sexo (opcional)",
+        "save_initial": "Guardar datos iniciales",
+        "saved": "¡Datos iniciales guardados con éxito!",
+        "choose_experiment": "Elige el experimento",
+        "experiment": "Experimento",
+        "weekly_answers": "Respuestas esta semana para este experimento:",
+        "ready": "Cuando estés listo, haz clic para iniciar el experimento.",
+        "start": "Iniciar experimento",
+        "limit": "Has alcanzado el límite semanal para este experimento. Elige otro experimento o vuelve la próxima semana.",
+        "submit": "Enviar respuesta",
+        "registered": "¡Respuesta registrada con éxito!",
+        "results": "Resultados en tiempo real",
+        "latest": "Última respuesta registrada:",
+        "answers_by_experiment": "Respuestas por experimento",
+        "distribution": "Distribución por experimento",
+        "select_exp": "Selecciona un experimento para visualizar",
+        "frequency": "Tabla de frecuencia",
+        "dominant": "Respuesta más frecuente",
+        "dominant_answer": "Respuesta dominante",
+        "predictability": "Índice de previsibilidad (%)",
+        "ranking": "Ranking de previsibilidad",
+        "trend": "Tendencia temporal",
+        "answers_week": "Respuestas por semana",
+        "participants_week": "Participantes por semana",
+        "dominant_week": "Respuesta dominante por semana",
+        "avg_time": "Tiempo medio de respuesta por experimento"
+    },
+    "Français": {
+        "title": "Human Predictability",
+        "subtitle": "Expériences de choix simples",
+        "objective": "Objectif : étudier si les choix humains simples présentent des schémas prévisibles au fil du temps.",
+        "anonymous_id": "Votre ID anonyme est :",
+        "initial_data": "Données initiales",
+        "age": "Quel âge avez-vous ?",
+        "sex": "Sexe (optionnel)",
+        "save_initial": "Enregistrer les données initiales",
+        "saved": "Données initiales enregistrées avec succès !",
+        "choose_experiment": "Choisissez l'expérience",
+        "experiment": "Expérience",
+        "weekly_answers": "Réponses cette semaine pour cette expérience :",
+        "ready": "Lorsque vous êtes prêt, cliquez pour commencer l'expérience.",
+        "start": "Commencer l'expérience",
+        "limit": "Vous avez atteint la limite hebdomadaire pour cette expérience. Choisissez une autre expérience ou revenez la semaine prochaine.",
+        "submit": "Envoyer la réponse",
+        "registered": "Réponse enregistrée avec succès !",
+        "results": "Résultats en temps réel",
+        "latest": "Dernière réponse enregistrée :",
+        "answers_by_experiment": "Réponses par expérience",
+        "distribution": "Distribution par expérience",
+        "select_exp": "Sélectionnez une expérience à visualiser",
+        "frequency": "Tableau de fréquence",
+        "dominant": "Réponse la plus fréquente",
+        "dominant_answer": "Réponse dominante",
+        "predictability": "Indice de prévisibilité (%)",
+        "ranking": "Classement de prévisibilité",
+        "trend": "Tendance temporelle",
+        "answers_week": "Réponses par semaine",
+        "participants_week": "Participants par semaine",
+        "dominant_week": "Réponse dominante par semaine",
+        "avg_time": "Temps moyen de réponse par expérience"
+    }
+}
+
+EXPERIMENT_LABELS = {
+    "Português": {
+        "numero_0_100": "Número de 0 a 100",
+        "numero_1_10": "Número de 1 a 10",
+        "cor": "Cor",
+        "cara_coroa": "Cara ou coroa",
+        "direcao": "Direção",
+        "forma_geometrica": "Forma geométrica",
+        "animal": "Animal",
+        "carta_baralho": "Carta de baralho",
+        "mes_ano": "Mês do ano",
+        "estacao": "Estação do ano",
+        "emoji": "Emoji",
+        "clima": "Clima"
+    },
+    "English": {
+        "numero_0_100": "Number from 0 to 100",
+        "numero_1_10": "Number from 1 to 10",
+        "cor": "Color",
+        "cara_coroa": "Coin toss",
+        "direcao": "Direction",
+        "forma_geometrica": "Geometric shape",
+        "animal": "Animal",
+        "carta_baralho": "Playing card",
+        "mes_ano": "Month of the year",
+        "estacao": "Season",
+        "emoji": "Emoji",
+        "clima": "Weather"
+    },
+    "Español": {
+        "numero_0_100": "Número de 0 a 100",
+        "numero_1_10": "Número de 1 a 10",
+        "cor": "Color",
+        "cara_coroa": "Cara o cruz",
+        "direcao": "Dirección",
+        "forma_geometrica": "Forma geométrica",
+        "animal": "Animal",
+        "carta_baralho": "Carta de baraja",
+        "mes_ano": "Mes del año",
+        "estacao": "Estación del año",
+        "emoji": "Emoji",
+        "clima": "Clima"
+    },
+    "Français": {
+        "numero_0_100": "Nombre de 0 à 100",
+        "numero_1_10": "Nombre de 1 à 10",
+        "cor": "Couleur",
+        "cara_coroa": "Pile ou face",
+        "direcao": "Direction",
+        "forma_geometrica": "Forme géométrique",
+        "animal": "Animal",
+        "carta_baralho": "Carte à jouer",
+        "mes_ano": "Mois de l'année",
+        "estacao": "Saison",
+        "emoji": "Emoji",
+        "clima": "Météo"
+    }
+}
+
+IDIOMA_CODIGO = {
+    "Português": "PT",
+    "English": "EN",
+    "Español": "ES",
+    "Français": "FR"
+}
+
+SEXO_OPCOES = {
+    "Português": {
+        "Prefiro não informar": "Prefiro não informar",
+        "Masculino": "Masculino",
+        "Feminino": "Feminino"
+    },
+    "English": {
+        "Prefer not to say": "Prefiro não informar",
+        "Male": "Masculino",
+        "Female": "Feminino"
+    },
+    "Español": {
+        "Prefiero no informar": "Prefiro não informar",
+        "Masculino": "Masculino",
+        "Femenino": "Feminino"
+    },
+    "Français": {
+        "Je préfère ne pas répondre": "Prefiro não informar",
+        "Masculin": "Masculino",
+        "Féminin": "Feminino"
+    }
+}
+
+
+def selectbox_traduzido(label, opcoes):
+    labels = list(opcoes.keys())
+    escolha_label = st.selectbox(label, labels)
+    return opcoes[escolha_label]
+
 
 @st.cache_resource
 def conectar_planilha():
@@ -57,9 +291,16 @@ cookies = EncryptedCookieManager(
 if not cookies.ready():
     st.stop()
 
-st.title("Human Predictability")
-st.subheader("Experimentos de escolhas simples")
-st.write("Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo.")
+idioma = st.selectbox(
+    "🌎 Language / Idioma / Langue",
+    ["Português", "English", "Español", "Français"]
+)
+
+t = TEXTOS[idioma]
+
+st.title(t["title"])
+st.subheader(t["subtitle"])
+st.write(t["objective"])
 
 user_id = cookies.get("user_id")
 
@@ -68,31 +309,31 @@ if user_id is None:
     cookies["user_id"] = user_id
     cookies.save()
 
-st.info(f"Seu ID anônimo é: {user_id}")
+st.info(f"{t['anonymous_id']} {user_id}")
 
 idade_cookie = cookies.get("idade")
 sexo_cookie = cookies.get("sexo")
 
 if idade_cookie is None or sexo_cookie is None:
-    st.subheader("Dados iniciais")
+    st.subheader(t["initial_data"])
 
     idade = st.number_input(
-        "Qual sua idade?",
+        t["age"],
         min_value=10,
         max_value=100,
         step=1
     )
 
-    sexo = st.selectbox(
-        "Sexo (opcional)",
-        ["Prefiro não informar", "Masculino", "Feminino"]
+    sexo = selectbox_traduzido(
+        t["sex"],
+        SEXO_OPCOES[idioma]
     )
 
-    if st.button("Salvar dados iniciais"):
+    if st.button(t["save_initial"]):
         cookies["idade"] = str(idade)
         cookies["sexo"] = sexo
         cookies.save()
-        st.success("Dados iniciais salvos com sucesso!")
+        st.success(t["saved"])
         st.rerun()
 
     st.stop()
@@ -100,7 +341,6 @@ if idade_cookie is None or sexo_cookie is None:
 else:
     idade = int(idade_cookie)
     sexo = sexo_cookie
-
 
 agora = datetime.now()
 semana_ano = f"{agora.year}-{agora.isocalendar().week}"
@@ -110,7 +350,6 @@ try:
 except Exception:
     st.error("Não foi possível carregar os dados da planilha neste momento.")
     df_respostas = pd.DataFrame()
-
 
 if not df_respostas.empty and "user_id" in df_respostas.columns:
     total_respostas_global = len(df_respostas)
@@ -157,9 +396,19 @@ if "experimento_atual" not in st.session_state:
 
 
 if not st.session_state.experimento_iniciado:
-    st.subheader("Escolha o experimento")
+    st.subheader(t["choose_experiment"])
 
-    experimento = st.selectbox("Experimento", EXPERIMENTOS)
+    label_para_codigo = {
+        EXPERIMENT_LABELS[idioma][codigo]: codigo
+        for codigo in EXPERIMENTOS
+    }
+
+    experimento_label = st.selectbox(
+        t["experiment"],
+        list(label_para_codigo.keys())
+    )
+
+    experimento = label_para_codigo[experimento_label]
 
     total_respostas_semana = contar_respostas_semanais(
         df_respostas,
@@ -169,25 +418,22 @@ if not st.session_state.experimento_iniciado:
     )
 
     st.write(
-        f"Respostas nesta semana para este experimento: "
+        f"{t['weekly_answers']} "
         f"**{total_respostas_semana}/{MAX_RESPOSTAS_SEMANA}**"
     )
 
     pode_responder_experimento = total_respostas_semana < MAX_RESPOSTAS_SEMANA
 
     if pode_responder_experimento:
-        st.write("Quando estiver pronto, clique para iniciar o experimento.")
+        st.write(t["ready"])
 
-        if st.button("Iniciar experimento"):
+        if st.button(t["start"]):
             st.session_state.experimento_iniciado = True
             st.session_state.start_time = datetime.now()
             st.session_state.experimento_atual = experimento
             st.rerun()
     else:
-        st.warning(
-            "Você atingiu o limite semanal para este experimento. "
-            "Escolha outro experimento ou volte na próxima semana."
-        )
+        st.warning(t["limit"])
 
 else:
     experimento = st.session_state.experimento_atual
@@ -195,137 +441,168 @@ else:
     resposta = None
 
     if experimento == "numero_0_100":
-        st.write("Escolha rapidamente um número de 0 a 100.")
-
-        numero_digitado = st.text_input(
-            "Qual número você escolheu?",
-            placeholder="Digite um número entre 0 e 100"
-        )
+        st.write(EXPERIMENT_LABELS[idioma]["numero_0_100"])
+        numero_digitado = st.text_input("", placeholder="0 - 100")
 
         if numero_digitado.strip() == "":
             resposta_valida = False
-            st.info("Digite um número para enviar sua resposta.")
         else:
             try:
                 numero_convertido = int(numero_digitado)
-
                 if 0 <= numero_convertido <= 100:
                     resposta = numero_convertido
                 else:
                     resposta_valida = False
-                    st.warning("O número precisa estar entre 0 e 100.")
-
+                    st.warning("0 - 100")
             except ValueError:
                 resposta_valida = False
-                st.warning("Digite apenas números inteiros, sem letras ou símbolos.")
+                st.warning("Use only whole numbers.")
 
     elif experimento == "numero_1_10":
-        st.write("Escolha rapidamente um número de 1 a 10.")
-
-        numero_digitado = st.text_input(
-            "Qual número você escolheu?",
-            placeholder="Digite um número entre 1 e 10"
-        )
+        st.write(EXPERIMENT_LABELS[idioma]["numero_1_10"])
+        numero_digitado = st.text_input("", placeholder="1 - 10")
 
         if numero_digitado.strip() == "":
             resposta_valida = False
-            st.info("Digite um número para enviar sua resposta.")
         else:
             try:
                 numero_convertido = int(numero_digitado)
-
                 if 1 <= numero_convertido <= 10:
                     resposta = numero_convertido
                 else:
                     resposta_valida = False
-                    st.warning("O número precisa estar entre 1 e 10.")
-
+                    st.warning("1 - 10")
             except ValueError:
                 resposta_valida = False
-                st.warning("Digite apenas números inteiros, sem letras ou símbolos.")
+                st.warning("Use only whole numbers.")
 
     elif experimento == "cor":
-        st.write("Escolha rapidamente uma cor.")
-        resposta = st.selectbox(
-            "Qual cor você escolheu?",
-            ["Azul", "Vermelho", "Verde", "Amarelo", "Preto", "Branco"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["cor"],
+            {
+                "Azul" if idioma in ["Português", "Español"] else "Blue" if idioma == "English" else "Bleu": "Azul",
+                "Vermelho" if idioma == "Português" else "Red" if idioma == "English" else "Rojo" if idioma == "Español" else "Rouge": "Vermelho",
+                "Verde" if idioma in ["Português", "Español"] else "Green" if idioma == "English" else "Vert": "Verde",
+                "Amarelo" if idioma == "Português" else "Yellow" if idioma == "English" else "Amarillo" if idioma == "Español" else "Jaune": "Amarelo",
+                "Preto" if idioma == "Português" else "Black" if idioma == "English" else "Negro" if idioma == "Español" else "Noir": "Preto",
+                "Branco" if idioma == "Português" else "White" if idioma == "English" else "Blanco" if idioma == "Español" else "Blanc": "Branco"
+            }
         )
 
     elif experimento == "cara_coroa":
-        st.write("Escolha rapidamente uma opção.")
-        resposta = st.selectbox(
-            "Cara ou coroa?",
-            ["Cara", "Coroa"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["cara_coroa"],
+            {
+                "Cara" if idioma in ["Português", "Español"] else "Heads" if idioma == "English" else "Pile": "Cara",
+                "Coroa" if idioma == "Português" else "Tails" if idioma == "English" else "Cruz" if idioma == "Español" else "Face": "Coroa"
+            }
         )
 
     elif experimento == "direcao":
-        st.write("Escolha rapidamente uma direção.")
-        resposta = st.selectbox(
-            "Qual direção você escolheu?",
-            ["Norte", "Sul", "Leste", "Oeste"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["direcao"],
+            {
+                "Norte" if idioma in ["Português", "Español"] else "North" if idioma == "English" else "Nord": "Norte",
+                "Sul" if idioma == "Português" else "South" if idioma == "English" else "Sur" if idioma == "Español" else "Sud": "Sul",
+                "Leste" if idioma == "Português" else "East" if idioma == "English" else "Este" if idioma == "Español" else "Est": "Leste",
+                "Oeste" if idioma in ["Português", "Español"] else "West" if idioma == "English" else "Ouest": "Oeste"
+            }
         )
 
     elif experimento == "forma_geometrica":
-        st.write("Escolha rapidamente uma forma geométrica.")
-        resposta = st.selectbox(
-            "Qual forma você escolheu?",
-            ["Circulo", "Quadrado", "Triangulo", "Retangulo", "Estrela", "Losango"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["forma_geometrica"],
+            {
+                "Circulo" if idioma == "Português" else "Circle" if idioma == "English" else "Círculo" if idioma == "Español" else "Cercle": "Circulo",
+                "Quadrado" if idioma == "Português" else "Square" if idioma == "English" else "Cuadrado" if idioma == "Español" else "Carré": "Quadrado",
+                "Triangulo" if idioma == "Português" else "Triangle" if idioma == "English" else "Triángulo" if idioma == "Español" else "Triangle": "Triangulo",
+                "Retangulo" if idioma == "Português" else "Rectangle" if idioma == "English" else "Rectángulo" if idioma == "Español" else "Rectangle": "Retangulo",
+                "Estrela" if idioma == "Português" else "Star" if idioma == "English" else "Estrella" if idioma == "Español" else "Étoile": "Estrela",
+                "Losango" if idioma == "Português" else "Diamond" if idioma == "English" else "Rombo" if idioma == "Español" else "Losange": "Losango"
+            }
         )
 
     elif experimento == "animal":
-        st.write("Escolha rapidamente um animal.")
-        resposta = st.selectbox(
-            "Qual animal você escolheu?",
-            ["Cachorro", "Gato", "Leao", "Lobo", "Aguia", "Golfinho"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["animal"],
+            {
+                "Cachorro" if idioma == "Português" else "Dog" if idioma == "English" else "Perro" if idioma == "Español" else "Chien": "Cachorro",
+                "Gato" if idioma in ["Português", "Español"] else "Cat" if idioma == "English" else "Chat": "Gato",
+                "Leao" if idioma == "Português" else "Lion" if idioma == "English" else "León" if idioma == "Español" else "Lion": "Leao",
+                "Lobo" if idioma in ["Português", "Español"] else "Wolf" if idioma == "English" else "Loup": "Lobo",
+                "Aguia" if idioma == "Português" else "Eagle" if idioma == "English" else "Águila" if idioma == "Español" else "Aigle": "Aguia",
+                "Golfinho" if idioma == "Português" else "Dolphin" if idioma == "English" else "Delfín" if idioma == "Español" else "Dauphin": "Golfinho"
+            }
         )
 
     elif experimento == "carta_baralho":
-        st.write("Escolha rapidamente uma carta de baralho.")
-
-        naipe = st.selectbox(
-            "Escolha o naipe:",
-            ["Copas", "Espadas", "Ouros", "Paus"]
+        naipe = selectbox_traduzido(
+            "Suit / Naipe",
+            {
+                "Copas" if idioma in ["Português", "Español"] else "Hearts" if idioma == "English" else "Cœurs": "Copas",
+                "Espadas" if idioma in ["Português", "Español"] else "Spades" if idioma == "English" else "Piques": "Espadas",
+                "Ouros" if idioma == "Português" else "Diamonds" if idioma == "English" else "Oros" if idioma == "Español" else "Carreaux": "Ouros",
+                "Paus" if idioma == "Português" else "Clubs" if idioma == "English" else "Bastos" if idioma == "Español" else "Trèfles": "Paus"
+            }
         )
 
         carta = st.selectbox(
-            "Escolha a carta:",
+            "Card / Carta",
             ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
         )
 
         resposta = f"{carta} de {naipe}"
 
     elif experimento == "mes_ano":
-        st.write("Escolha rapidamente um mês do ano.")
-        resposta = st.selectbox(
-            "Qual mês você escolheu?",
-            [
-                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-            ]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["mes_ano"],
+            {
+                "Janeiro" if idioma == "Português" else "January" if idioma == "English" else "Enero" if idioma == "Español" else "Janvier": "Janeiro",
+                "Fevereiro" if idioma == "Português" else "February" if idioma == "English" else "Febrero" if idioma == "Español" else "Février": "Fevereiro",
+                "Março" if idioma == "Português" else "March" if idioma == "English" else "Marzo" if idioma == "Español" else "Mars": "Março",
+                "Abril" if idioma == "Português" else "April" if idioma == "English" else "Abril" if idioma == "Español" else "Avril": "Abril",
+                "Maio" if idioma == "Português" else "May" if idioma == "English" else "Mayo" if idioma == "Español" else "Mai": "Maio",
+                "Junho" if idioma == "Português" else "June" if idioma == "English" else "Junio" if idioma == "Español" else "Juin": "Junho",
+                "Julho" if idioma == "Português" else "July" if idioma == "English" else "Julio" if idioma == "Español" else "Juillet": "Julho",
+                "Agosto" if idioma == "Português" else "August" if idioma == "English" else "Agosto" if idioma == "Español" else "Août": "Agosto",
+                "Setembro" if idioma == "Português" else "September" if idioma == "English" else "Septiembre" if idioma == "Español" else "Septembre": "Setembro",
+                "Outubro" if idioma == "Português" else "October" if idioma == "English" else "Octubre" if idioma == "Español" else "Octobre": "Outubro",
+                "Novembro" if idioma == "Português" else "November" if idioma == "English" else "Noviembre" if idioma == "Español" else "Novembre": "Novembro",
+                "Dezembro" if idioma == "Português" else "December" if idioma == "English" else "Diciembre" if idioma == "Español" else "Décembre": "Dezembro"
+            }
         )
 
     elif experimento == "estacao":
-        st.write("Escolha rapidamente uma estação do ano.")
-        resposta = st.selectbox(
-            "Qual estação você escolheu?",
-            ["Verão", "Outono", "Inverno", "Primavera"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["estacao"],
+            {
+                "Verão" if idioma == "Português" else "Summer" if idioma == "English" else "Verano" if idioma == "Español" else "Été": "Verão",
+                "Outono" if idioma == "Português" else "Autumn" if idioma == "English" else "Otoño" if idioma == "Español" else "Automne": "Outono",
+                "Inverno" if idioma == "Português" else "Winter" if idioma == "English" else "Invierno" if idioma == "Español" else "Hiver": "Inverno",
+                "Primavera" if idioma in ["Português", "Español"] else "Spring" if idioma == "English" else "Printemps": "Primavera"
+            }
         )
 
     elif experimento == "emoji":
-        st.write("Escolha rapidamente um emoji.")
         resposta = st.selectbox(
-            "Qual emoji você escolheu?",
+            EXPERIMENT_LABELS[idioma]["emoji"],
             ["😀", "😂", "😎", "😍", "😢", "😡", "🔥", "❤️"]
         )
 
     elif experimento == "clima":
-        st.write("Escolha rapidamente um tipo de clima.")
-        resposta = st.selectbox(
-            "Qual clima você escolheu?",
-            ["Sol", "Chuva", "Nublado", "Neve", "Tempestade", "Vento"]
+        resposta = selectbox_traduzido(
+            EXPERIMENT_LABELS[idioma]["clima"],
+            {
+                "Sol" if idioma == "Português" else "Sun" if idioma == "English" else "Sol" if idioma == "Español" else "Soleil": "Sol",
+                "Chuva" if idioma == "Português" else "Rain" if idioma == "English" else "Lluvia" if idioma == "Español" else "Pluie": "Chuva",
+                "Nublado" if idioma == "Português" else "Cloudy" if idioma == "English" else "Nublado" if idioma == "Español" else "Nuageux": "Nublado",
+                "Neve" if idioma == "Português" else "Snow" if idioma == "English" else "Nieve" if idioma == "Español" else "Neige": "Neve",
+                "Tempestade" if idioma == "Português" else "Storm" if idioma == "English" else "Tormenta" if idioma == "Español" else "Tempête": "Tempestade",
+                "Vento" if idioma == "Português" else "Wind" if idioma == "English" else "Viento" if idioma == "Español" else "Vent": "Vento"
+            }
         )
 
-    if st.button("Enviar resposta", disabled=not resposta_valida):
+    if st.button(t["submit"], disabled=not resposta_valida):
         agora = datetime.now()
 
         tempo_resposta = (
@@ -342,7 +619,8 @@ else:
             agora.hour,
             agora.strftime("%A"),
             semana_ano,
-            round(tempo_resposta, 2)
+            round(tempo_resposta, 2),
+            IDIOMA_CODIGO[idioma]
         ]
 
         salvar_resposta(nova_resposta)
@@ -351,12 +629,11 @@ else:
         st.session_state.start_time = None
         st.session_state.experimento_atual = None
 
-        st.success("Resposta registrada com sucesso!")
+        st.success(t["registered"])
         st.rerun()
 
-
 st.divider()
-st.subheader("Resultados em tempo real")
+st.subheader(t["results"])
 
 colunas_dashboard = [
     "user_id",
@@ -375,21 +652,17 @@ if df_respostas.empty:
     st.write("Ainda não há respostas coletadas.")
 
 elif not all(col in df_respostas.columns for col in colunas_dashboard):
-    st.warning(
-        "A planilha ainda não possui todas as colunas esperadas para exibir o dashboard."
-    )
-
+    st.warning("A planilha ainda não possui todas as colunas esperadas para exibir o dashboard.")
     st.write("Colunas esperadas:")
     st.write(colunas_dashboard)
-
     st.write("Colunas encontradas:")
     st.write(list(df_respostas.columns))
 
 else:
     ultima_atualizacao = df_respostas["timestamp"].max()
-    st.caption(f"Última resposta registrada: {ultima_atualizacao}")
+    st.caption(f"{t['latest']} {ultima_atualizacao}")
 
-    st.write("Respostas por experimento")
+    st.write(t["answers_by_experiment"])
 
     respostas_por_experimento = (
         df_respostas["tipo_experimento"]
@@ -402,20 +675,15 @@ else:
         "quantidade"
     ]
 
-    st.bar_chart(
-        respostas_por_experimento.set_index("tipo_experimento")
-    )
+    st.bar_chart(respostas_por_experimento.set_index("tipo_experimento"))
 
     st.divider()
+    st.write(t["distribution"])
 
-    st.write("Distribuição por experimento")
-
-    experimentos_disponiveis = sorted(
-        df_respostas["tipo_experimento"].dropna().unique()
-    )
+    experimentos_disponiveis = sorted(df_respostas["tipo_experimento"].dropna().unique())
 
     experimento_dashboard = st.selectbox(
-        "Selecione um experimento para visualizar",
+        t["select_exp"],
         experimentos_disponiveis
     )
 
@@ -439,19 +707,13 @@ else:
             contagem_respostas["resposta"],
             errors="coerce"
         )
-
         contagem_respostas = contagem_respostas.sort_values("resposta")
     else:
-        contagem_respostas = contagem_respostas.sort_values(
-            "quantidade",
-            ascending=False
-        )
+        contagem_respostas = contagem_respostas.sort_values("quantidade", ascending=False)
 
-    st.bar_chart(
-        contagem_respostas.set_index("resposta")
-    )
+    st.bar_chart(contagem_respostas.set_index("resposta"))
 
-    st.write("Tabela de frequência")
+    st.write(t["frequency"])
 
     total_experimento = contagem_respostas["quantidade"].sum()
 
@@ -462,36 +724,25 @@ else:
     st.dataframe(contagem_respostas)
 
     st.divider()
-    st.write("Resposta mais frequente")
+    st.write(t["dominant"])
 
     resposta_dominante = contagem_respostas.iloc[0]
 
     percentual_dominante = round(
-        resposta_dominante["quantidade"]
-        / contagem_respostas["quantidade"].sum()
-        * 100,
+        resposta_dominante["quantidade"] / contagem_respostas["quantidade"].sum() * 100,
         2
     )
 
-    st.metric(
-        label="Resposta dominante",
-        value=str(resposta_dominante["resposta"])
-    )
-
-    st.metric(
-        label="Índice de previsibilidade (%)",
-        value=percentual_dominante
-    )
+    st.metric(label=t["dominant_answer"], value=str(resposta_dominante["resposta"]))
+    st.metric(label=t["predictability"], value=percentual_dominante)
 
     st.divider()
-    st.subheader("Ranking de previsibilidade")
+    st.subheader(t["ranking"])
 
     ranking_previsibilidade = []
 
     for experimento in sorted(df_respostas["tipo_experimento"].dropna().unique()):
-        df_exp = df_respostas[
-            df_respostas["tipo_experimento"] == experimento
-        ]
+        df_exp = df_respostas[df_respostas["tipo_experimento"] == experimento]
 
         contagem = (
             df_exp["resposta"]
@@ -499,17 +750,12 @@ else:
             .reset_index()
         )
 
-        contagem.columns = [
-            "resposta",
-            "quantidade"
-        ]
+        contagem.columns = ["resposta", "quantidade"]
 
         resposta_dominante_exp = contagem.iloc[0]["resposta"]
 
         percentual_exp = round(
-            contagem.iloc[0]["quantidade"]
-            / contagem["quantidade"].sum()
-            * 100,
+            contagem.iloc[0]["quantidade"] / contagem["quantidade"].sum() * 100,
             2
         )
 
@@ -520,25 +766,15 @@ else:
         })
 
     ranking_df = pd.DataFrame(ranking_previsibilidade)
+    ranking_df = ranking_df.sort_values(by="previsibilidade_%", ascending=False)
 
-    ranking_df = ranking_df.sort_values(
-        by="previsibilidade_%",
-        ascending=False
-    )
-
-    st.dataframe(
-        ranking_df,
-        use_container_width=True
-    )
-
-    st.bar_chart(
-        ranking_df.set_index("tipo_experimento")["previsibilidade_%"]
-    )
+    st.dataframe(ranking_df, use_container_width=True)
+    st.bar_chart(ranking_df.set_index("tipo_experimento")["previsibilidade_%"])
 
     st.divider()
-    st.subheader("Tendência temporal")
+    st.subheader(t["trend"])
 
-    st.write("Respostas por semana")
+    st.write(t["answers_week"])
 
     respostas_por_semana = (
         df_respostas
@@ -548,16 +784,10 @@ else:
         .sort_values("semana_ano")
     )
 
-    st.bar_chart(
-        respostas_por_semana.set_index("semana_ano")
-    )
+    st.bar_chart(respostas_por_semana.set_index("semana_ano"))
+    st.dataframe(respostas_por_semana, use_container_width=True)
 
-    st.dataframe(
-        respostas_por_semana,
-        use_container_width=True
-    )
-
-    st.write("Participantes por semana")
+    st.write(t["participants_week"])
 
     participantes_por_semana = (
         df_respostas
@@ -567,23 +797,15 @@ else:
         .sort_values("semana_ano")
     )
 
-    st.bar_chart(
-        participantes_por_semana.set_index("semana_ano")
-    )
+    st.bar_chart(participantes_por_semana.set_index("semana_ano"))
+    st.dataframe(participantes_por_semana, use_container_width=True)
 
-    st.dataframe(
-        participantes_por_semana,
-        use_container_width=True
-    )
-
-    st.write("Resposta dominante por semana")
+    st.write(t["dominant_week"])
 
     dominante_por_semana = []
 
     for semana in sorted(df_respostas["semana_ano"].dropna().unique()):
-        df_semana = df_respostas[
-            df_respostas["semana_ano"] == semana
-        ]
+        df_semana = df_respostas[df_respostas["semana_ano"] == semana]
 
         contagem_semana = (
             df_semana["resposta"]
@@ -591,17 +813,12 @@ else:
             .reset_index()
         )
 
-        contagem_semana.columns = [
-            "resposta",
-            "quantidade"
-        ]
+        contagem_semana.columns = ["resposta", "quantidade"]
 
         resposta_dominante_semana = contagem_semana.iloc[0]["resposta"]
 
         percentual_semana = round(
-            contagem_semana.iloc[0]["quantidade"]
-            / contagem_semana["quantidade"].sum()
-            * 100,
+            contagem_semana.iloc[0]["quantidade"] / contagem_semana["quantidade"].sum() * 100,
             2
         )
 
@@ -612,14 +829,10 @@ else:
         })
 
     dominante_semana_df = pd.DataFrame(dominante_por_semana)
-
-    st.dataframe(
-        dominante_semana_df,
-        use_container_width=True
-    )
+    st.dataframe(dominante_semana_df, use_container_width=True)
 
     st.divider()
-    st.write("Tempo médio de resposta por experimento")
+    st.write(t["avg_time"])
 
     tempo_coluna = (
         df_respostas["tempo_resposta_segundos"]
@@ -627,10 +840,7 @@ else:
         .str.replace(",", ".", regex=False)
     )
 
-    tempo_coluna = pd.to_numeric(
-        tempo_coluna,
-        errors="coerce"
-    ).astype(float)
+    tempo_coluna = pd.to_numeric(tempo_coluna, errors="coerce").astype(float)
 
     tempo_coluna = tempo_coluna.apply(
         lambda x: x / 100 if pd.notnull(x) and x > 30 else x
@@ -652,8 +862,5 @@ else:
         "tempo_medio_segundos"
     ]
 
-    st.bar_chart(
-        tempo_medio.set_index("tipo_experimento")
-    )
-
+    st.bar_chart(tempo_medio.set_index("tipo_experimento"))
     st.dataframe(tempo_medio)
