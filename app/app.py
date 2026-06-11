@@ -299,6 +299,12 @@ idioma = st.selectbox(
 t = TEXTOS[idioma]
 
 st.title(t["title"])
+st.warning(
+    "🚧 O aplicativo está temporariamente em manutenção para melhorias.\n\n"
+    "Voltaremos em breve."
+)
+
+st.stop()
 st.subheader(t["subtitle"])
 st.write(t["objective"])
 
