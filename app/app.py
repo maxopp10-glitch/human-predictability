@@ -34,7 +34,7 @@ TEXTOS = {
     "Português": {
         "title": "Human Predictability",
         "subtitle": "Experimentos de escolhas simples",
-        "objective": "objective": "🧠 Você consegue ser imprevisível?\n\nParticipe de desafios rápidos e descubra se suas escolhas são realmente únicas ou se seguem padrões parecidos com os da maioria das pessoas.\n\n⏱ Menos de 2 minutos\n🔒 Totalmente anônimo",
+        "objective": "🧠 Você consegue ser imprevisível?\n\nParticipe de desafios rápidos e descubra se suas escolhas são realmente únicas ou se seguem padrões parecidos com os da maioria das pessoas.\n\n⏱ Menos de 2 minutos\n🔒 Totalmente anônimo",
         "anonymous_id": "Seu ID anônimo é:",
         "initial_data": "Dados iniciais",
         "age": "Qual sua idade?",
