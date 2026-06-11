@@ -2,11 +2,16 @@ import streamlit as st
 import pandas as pd
 import uuid
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from streamlit_cookies_manager import EncryptedCookieManager
 import gspread
 from google.oauth2.service_account import Credentials
 
 MAX_RESPOSTAS_SEMANA = 3
+APP_TIMEZONE = ZoneInfo("America/Sao_Paulo")
+MAINTENANCE_MODE = True
+def agora_brasil():
+    return datetime.now(APP_TIMEZONE)
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
@@ -58,7 +63,20 @@ TEXTOS = {
         "answers_week": "Respostas por semana",
         "participants_week": "Participantes por semana",
         "dominant_week": "Resposta dominante por semana",
-        "avg_time": "Tempo médio de resposta por experimento"
+        "avg_time": "Tempo médio de resposta por experimento",
+        "instructions_title": "Como participar",
+        "instructions": """
+        1. Escolha um experimento.
+        2. Clique em "Iniciar experimento".
+        3. Responda o mais rápido possível.
+        4. Clique em "Enviar resposta".
+        5. Você pode participar de vários experimentos diferentes.
+
+        ⏱ Tempo total estimado: cerca de 2 minutos.
+        🔒 Todas as respostas são anônimas.
+        """,    
+        "weekly_limit_text": "Você pode responder este experimento até 3 vezes por semana.",
+        "weekly_done_text": "Respostas já realizadas:",
     },
     "English": {
         "title": "Human Predictability",
@@ -92,7 +110,20 @@ TEXTOS = {
         "answers_week": "Answers per week",
         "participants_week": "Participants per week",
         "dominant_week": "Dominant answer per week",
-        "avg_time": "Average response time by experiment"
+        "avg_time": "Average response time by experiment",
+        "instructions_title": "How to participate",
+        "instructions": """
+        1. Choose an experiment.
+        2. Click "Start experiment".
+        3. Answer as quickly as possible.
+        4. Click "Submit answer".
+        5. You can participate in multiple different experiments.
+
+        ⏱ Estimated total time: about 2 minutes.
+        🔒 All answers are anonymous.
+        """,
+        "weekly_limit_text": "You can answer this experiment up to 3 times per week.",
+        "weekly_done_text": "Answers already submitted:",
     },
     "Español": {
         "title": "Human Predictability",
@@ -126,7 +157,20 @@ TEXTOS = {
         "answers_week": "Respuestas por semana",
         "participants_week": "Participantes por semana",
         "dominant_week": "Respuesta dominante por semana",
-        "avg_time": "Tiempo medio de respuesta por experimento"
+        "avg_time": "Tiempo medio de respuesta por experimento",
+        "instructions_title": "Cómo participar",
+        "instructions": """
+        1. Elige un experimento.
+        2. Haz clic en "Iniciar experimento".
+        3. Responde lo más rápido posible.
+        4. Haz clic en "Enviar respuesta".
+        5. Puedes participar en varios experimentos diferentes.
+
+        ⏱ Tiempo estimado: aproximadamente 2 minutos.
+        🔒 Todas las respuestas son anónimas.
+        """,
+        "weekly_limit_text": "Puedes responder este experimento hasta 3 veces por semana.",
+        "weekly_done_text": "Respuestas ya realizadas:",
     },
     "Français": {
         "title": "Human Predictability",
@@ -160,7 +204,20 @@ TEXTOS = {
         "answers_week": "Réponses par semaine",
         "participants_week": "Participants par semaine",
         "dominant_week": "Réponse dominante par semaine",
-        "avg_time": "Temps moyen de réponse par expérience"
+        "avg_time": "Temps moyen de réponse par expérience",
+        "instructions_title": "Comment participer",
+        "instructions": """
+        1. Choisissez une expérience.
+        2. Cliquez sur "Commencer l'expérience".
+        3. Répondez aussi vite que possible.
+        4. Cliquez sur "Envoyer la réponse".
+        5. Vous pouvez participer à plusieurs expériences différentes.
+
+        ⏱ Temps estimé : environ 2 minutes.
+        🔒 Toutes les réponses sont anonymes.
+        """,
+        "weekly_limit_text": "Vous pouvez répondre à cette expérience jusqu'à 3 fois par semaine.",
+        "weekly_done_text": "Réponses déjà envoyées :",
     }
 }
 
@@ -298,15 +355,103 @@ idioma = st.selectbox(
 
 t = TEXTOS[idioma]
 
-st.title(t["title"])
-st.warning(
-    "🚧 O aplicativo está temporariamente em manutenção para melhorias.\n\n"
-    "Voltaremos em breve."
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #f7fbff 0%, #eef4ff 45%, #ffffff 100%);
+    }
+
+    section.main > div {
+        max-width: 900px;
+        padding-top: 2rem;
+    }
+
+    h1 {
+        font-size: 3rem !important;
+        font-weight: 800 !important;
+        letter-spacing: -1px;
+    }
+
+    h2, h3 {
+        font-weight: 700 !important;
+    }
+
+    div[data-testid="stMetric"] {
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(120, 140, 180, 0.18);
+        padding: 18px;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    div[data-testid="stAlert"] {
+        border-radius: 16px;
+    }
+
+    .instruction-card {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(120, 140, 180, 0.18);
+        border-radius: 20px;
+        padding: 22px 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+        margin: 18px 0 24px 0;
+    }
+
+    .instruction-card h3 {
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .instruction-card p {
+        margin-bottom: 8px;
+        line-height: 1.55;
+    }
+
+    .small-note {
+        color: #475569;
+        font-size: 0.95rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
-st.stop()
+st.title(t["title"])
+st.markdown(
+    """
+    <div style="
+        display: inline-block;
+        background: #e0f2fe;
+        color: #075985;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+    ">
+        Versão 1.0 — Official Launch
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+if MAINTENANCE_MODE:
+    st.warning(
+        "🚧 O aplicativo está temporariamente em manutenção para melhorias.\n\n"
+        "Voltaremos em breve."
+    )
+    st.stop()
 st.subheader(t["subtitle"])
 st.write(t["objective"])
+st.markdown(
+    f"""
+    <div class="instruction-card">
+        <h3>🧠 {t["instructions_title"]}</h3>
+        <p>{t["instructions"].replace(chr(10), "<br>")}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 user_id = cookies.get("user_id")
 
@@ -348,7 +493,7 @@ else:
     idade = int(idade_cookie)
     sexo = sexo_cookie
 
-agora = datetime.now()
+agora = agora_brasil()
 semana_ano = f"{agora.year}-{agora.isocalendar().week}"
 
 try:
@@ -423,10 +568,10 @@ if not st.session_state.experimento_iniciado:
         experimento
     )
 
-    st.write(
-        f"{t['weekly_answers']} "
-        f"**{total_respostas_semana}/{MAX_RESPOSTAS_SEMANA}**"
-    )
+    st.info(
+        f"{t['weekly_limit_text']}\n\n"
+        f"{t['weekly_done_text']} **{total_respostas_semana} de {MAX_RESPOSTAS_SEMANA}**"
+)
 
     pode_responder_experimento = total_respostas_semana < MAX_RESPOSTAS_SEMANA
 
@@ -435,7 +580,7 @@ if not st.session_state.experimento_iniciado:
 
         if st.button(t["start"]):
             st.session_state.experimento_iniciado = True
-            st.session_state.start_time = datetime.now()
+            st.session_state.start_time = agora_brasil()
             st.session_state.experimento_atual = experimento
             st.rerun()
     else:
@@ -609,7 +754,7 @@ else:
         )
 
     if st.button(t["submit"], disabled=not resposta_valida):
-        agora = datetime.now()
+        agora = agora_brasil()
 
         tempo_resposta = (
             agora - st.session_state.start_time
