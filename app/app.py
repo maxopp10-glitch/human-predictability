@@ -34,7 +34,7 @@ TEXTOS = {
     "Português": {
         "title": "Human Predictability",
         "subtitle": "Experimentos de escolhas simples",
-        "objective": "Objetivo: estudar se escolhas humanas simples apresentam padrões previsíveis ao longo do tempo.",
+        "objective": "objective": "🧠 Você consegue ser imprevisível?\n\nParticipe de desafios rápidos e descubra se suas escolhas são realmente únicas ou se seguem padrões parecidos com os da maioria das pessoas.\n\n⏱ Menos de 2 minutos\n🔒 Totalmente anônimo",
         "anonymous_id": "Seu ID anônimo é:",
         "initial_data": "Dados iniciais",
         "age": "Qual sua idade?",
@@ -48,7 +48,7 @@ TEXTOS = {
         "start": "Iniciar experimento",
         "limit": "Você atingiu o limite semanal para este experimento. Escolha outro experimento ou volte na próxima semana.",
         "submit": "Enviar resposta",
-        "registered": "Resposta registrada com sucesso!",
+        "registered": "✅ Resposta registrada!\n\n🎯 Você pode testar outro experimento ou voltar mais tarde para contribuir novamente.",
         "results": "Resultados em tempo real",
         "latest": "Última resposta registrada:",
         "answers_by_experiment": "Respostas por experimento",
@@ -81,7 +81,7 @@ TEXTOS = {
     "English": {
         "title": "Human Predictability",
         "subtitle": "Simple choice experiments",
-        "objective": "Goal: study whether simple human choices show predictable patterns over time.",
+        "objective": "🧠 Can you be unpredictable?\n\nTake part in quick challenges and discover whether your choices are truly unique or follow patterns similar to most people.\n\n⏱ Less than 2 minutes\n🔒 Completely anonymous",
         "anonymous_id": "Your anonymous ID is:",
         "initial_data": "Initial data",
         "age": "How old are you?",
@@ -95,7 +95,7 @@ TEXTOS = {
         "start": "Start experiment",
         "limit": "You reached the weekly limit for this experiment. Choose another experiment or come back next week.",
         "submit": "Submit answer",
-        "registered": "Answer registered successfully!",
+        "registered": "✅ Answer registered!\n\n🎯 You can try another experiment or come back later to contribute again.",
         "results": "Real-time results",
         "latest": "Latest registered answer:",
         "answers_by_experiment": "Answers by experiment",
@@ -128,7 +128,7 @@ TEXTOS = {
     "Español": {
         "title": "Human Predictability",
         "subtitle": "Experimentos de elecciones simples",
-        "objective": "Objetivo: estudiar si las elecciones humanas simples presentan patrones previsibles a lo largo del tiempo.",
+        "objective": "🧠 ¿Puedes ser impredecible?\n\nParticipa en desafíos rápidos y descubre si tus decisiones son realmente únicas o si siguen patrones similares a los de la mayoría de las personas.\n\n⏱ Menos de 2 minutos\n🔒 Totalmente anónimo",
         "anonymous_id": "Tu ID anónimo es:",
         "initial_data": "Datos iniciales",
         "age": "¿Cuál es tu edad?",
@@ -142,7 +142,7 @@ TEXTOS = {
         "start": "Iniciar experimento",
         "limit": "Has alcanzado el límite semanal para este experimento. Elige otro experimento o vuelve la próxima semana.",
         "submit": "Enviar respuesta",
-        "registered": "¡Respuesta registrada con éxito!",
+        "registered": "✅ ¡Respuesta registrada!\n\n🎯 Puedes probar otro experimento o volver más tarde para contribuir nuevamente.",
         "results": "Resultados en tiempo real",
         "latest": "Última respuesta registrada:",
         "answers_by_experiment": "Respuestas por experimento",
@@ -175,7 +175,7 @@ TEXTOS = {
     "Français": {
         "title": "Human Predictability",
         "subtitle": "Expériences de choix simples",
-        "objective": "Objectif : étudier si les choix humains simples présentent des schémas prévisibles au fil du temps.",
+        "objective": "🧠 Pouvez-vous être imprévisible ?\n\nParticipez à de rapides défis et découvrez si vos choix sont vraiment uniques ou s'ils suivent des modèles similaires à ceux de la majorité.\n\n⏱ Moins de 2 minutes\n🔒 Totalement anonyme",
         "anonymous_id": "Votre ID anonyme est :",
         "initial_data": "Données initiales",
         "age": "Quel âge avez-vous ?",
@@ -189,7 +189,7 @@ TEXTOS = {
         "start": "Commencer l'expérience",
         "limit": "Vous avez atteint la limite hebdomadaire pour cette expérience. Choisissez une autre expérience ou revenez la semaine prochaine.",
         "submit": "Envoyer la réponse",
-        "registered": "Réponse enregistrée avec succès !",
+        "registered": "✅ Réponse enregistrée !\n\n🎯 Vous pouvez essayer une autre expérience ou revenir plus tard pour contribuer à nouveau.",
         "results": "Résultats en temps réel",
         "latest": "Dernière réponse enregistrée :",
         "answers_by_experiment": "Réponses par expérience",
@@ -420,35 +420,80 @@ st.markdown(
 st.title(t["title"])
 st.markdown(
     """
-    <div style="
-        display: inline-block;
-        background: #e0f2fe;
-        color: #075985;
-        padding: 6px 12px;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        font-weight: 600;
+    <style>
+    .stApp {
+        background:
+            radial-gradient(circle at top left, rgba(99, 102, 241, 0.20), transparent 32%),
+            radial-gradient(circle at top right, rgba(14, 165, 233, 0.18), transparent 30%),
+            radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.14), transparent 34%),
+            linear-gradient(135deg, #f8fbff 0%, #eef4ff 45%, #fdfcff 100%);
+    }
+
+    section.main > div {
+        max-width: 920px;
+        padding-top: 2rem;
+    }
+
+    h1 {
+        font-size: 3.2rem !important;
+        font-weight: 850 !important;
+        letter-spacing: -1.2px;
+        color: #0f172a;
+    }
+
+    h2, h3 {
+        font-weight: 750 !important;
+        color: #1e293b;
+    }
+
+    div[data-testid="stMetric"] {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(99, 102, 241, 0.16);
+        padding: 18px;
+        border-radius: 20px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+        backdrop-filter: blur(8px);
+    }
+
+    div[data-testid="stAlert"] {
+        border-radius: 16px;
+    }
+
+    .instruction-card {
+        background: rgba(255, 255, 255, 0.90);
+        border: 1px solid rgba(99, 102, 241, 0.18);
+        border-radius: 24px;
+        padding: 24px 26px;
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.09);
+        margin: 20px 0 26px 0;
+        backdrop-filter: blur(10px);
+    }
+
+    .instruction-card h3 {
+        margin-top: 0;
         margin-bottom: 12px;
-    ">
-        Versão 1.0 — Official Launch
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-if MAINTENANCE_MODE:
-    st.warning(
-        "🚧 O aplicativo está temporariamente em manutenção para melhorias.\n\n"
-        "Voltaremos em breve."
-    )
-    st.stop()
-st.subheader(t["subtitle"])
-st.write(t["objective"])
-st.markdown(
-    f"""
-    <div class="instruction-card">
-        <h3>🧠 {t["instructions_title"]}</h3>
-        <p>{t["instructions"].replace(chr(10), "<br>")}</p>
-    </div>
+        color: #0f172a;
+    }
+
+    .instruction-card p {
+        margin-bottom: 8px;
+        line-height: 1.6;
+        color: #334155;
+    }
+
+    .small-note {
+        color: #475569;
+        font-size: 0.95rem;
+    }
+
+    .stButton > button {
+        border-radius: 999px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 700;
+        border: 1px solid rgba(99, 102, 241, 0.35);
+        box-shadow: 0 8px 22px rgba(99, 102, 241, 0.16);
+    }
+    </style>
     """,
     unsafe_allow_html=True
 )
