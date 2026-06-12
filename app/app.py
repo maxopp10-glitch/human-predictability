@@ -289,7 +289,7 @@ TEXTOS = {
         Sin embargo, cuando se analizan grandes cantidades de respuestas en conjunto,
         pueden aparecer patrones sorprendentes.
         </p>
-        """,,
+        """,
 
         "weekly_limit_text": "Puedes responder este experimento hasta 3 veces por semana.",
         "weekly_done_text": "Respuestas ya realizadas:",
