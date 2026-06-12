@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 
 MAX_RESPOSTAS_SEMANA = 3
 APP_TIMEZONE = ZoneInfo("America/Sao_Paulo")
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 def agora_brasil():
     return datetime.now(APP_TIMEZONE)
 
