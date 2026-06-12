@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 
 MAX_RESPOSTAS_SEMANA = 3
 APP_TIMEZONE = ZoneInfo("America/Sao_Paulo")
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 def agora_brasil():
     return datetime.now(APP_TIMEZONE)
 
@@ -74,7 +74,56 @@ TEXTOS = {
 
         ⏱ Tempo total estimado: cerca de 2 minutos.
         🔒 Todas as respostas são anônimas.
-        """,    
+        """,   
+
+        "instructions": """
+        1. Escolha um experimento.
+        2. Clique em "Iniciar experimento".
+        3. Responda o mais rápido possível.
+        4. Clique em "Enviar resposta".
+        5. Você pode participar de vários experimentos diferentes.
+
+        ⏱ Tempo total estimado: cerca de 2 minutos.
+        🔒 Todas as respostas são anônimas.
+        """,
+
+        "instructions_card": """
+        <h3>🧠 Você consegue ser imprevisível?</h3>
+
+        <p>
+        Este estudo investiga se escolhas humanas aparentemente aleatórias
+        seguem padrões previsíveis quando analisadas em grupo.
+        </p>
+
+        <p>
+        ⏱ Tempo total: cerca de 2 minutos<br>
+        🔒 Todas as respostas são anônimas<br>
+        🌎 Participantes de vários países podem participar
+        </p>
+
+        <hr>
+
+        <h4>Como funciona</h4>
+
+        <p>
+        1️⃣ Escolha um experimento<br>
+        2️⃣ Responda o mais rápido possível, sem pensar demais<br>
+        3️⃣ Cada experimento pode ser respondido até <b>3 vezes por semana</b><br>
+        4️⃣ Ajude a descobrir se o comportamento humano é realmente imprevisível
+        </p>
+
+        <hr>
+
+        <h4>O que estamos tentando descobrir?</h4>
+
+        <p>
+        Muitas pessoas acreditam que suas escolhas são únicas.
+        Mas quando várias respostas são analisadas juntas,
+        padrões surpreendentes podem surgir.
+        </p>
+        """,
+
+        "weekly_limit_text": "Você pode responder este experimento até 3 vezes por semana.", 
         "weekly_limit_text": "Você pode responder este experimento até 3 vezes por semana.",
         "weekly_done_text": "Respostas já realizadas:",
     },
@@ -121,6 +170,38 @@ TEXTOS = {
 
         ⏱ Estimated total time: about 2 minutes.
         🔒 All answers are anonymous.
+        """,
+        "instructions_card": """
+        <h3>🧠 Can you be unpredictable?</h3>
+
+        <p>
+        This study investigates whether seemingly random human choices follow predictable patterns when analyzed collectively.
+        </p>
+
+        <p>
+        ⏱ Estimated time: about 2 minutes<br>
+        🔒 All responses are anonymous<br>
+        🌎 Participants from different countries are welcome
+        </p>
+
+        <hr>
+
+        <h4>How does it work?</h4>
+
+        <p>
+        1️⃣ Choose an experiment<br>
+        2️⃣ Answer as quickly as possible without overthinking<br>
+        3️⃣ Each experiment can be answered up to <b>3 times per week</b><br>
+        4️⃣ Help discover whether human behavior is truly unpredictable
+        </p>
+
+        <hr>
+
+        <h4>What are we trying to discover?</h4>
+
+        <p>
+        Many people believe their choices are unique. But when hundreds or thousands of answers are analyzed together, surprising patterns may emerge.
+        </p>
         """,
         "weekly_limit_text": "You can answer this experiment up to 3 times per week.",
         "weekly_done_text": "Answers already submitted:",
@@ -169,6 +250,40 @@ TEXTOS = {
         ⏱ Tiempo estimado: aproximadamente 2 minutos.
         🔒 Todas las respuestas son anónimas.
         """,
+
+        "instructions_card": """
+        <h3>🧠 ¿Puedes ser impredecible?</h3>
+
+        <p>
+        Este estudio investiga si las decisiones humanas aparentemente aleatorias siguen patrones predecibles cuando se analizan en conjunto.
+        </p>
+
+        <p>
+        ⏱ Tiempo estimado: aproximadamente 2 minutos<br>
+        🔒 Todas las respuestas son anónimas<br>
+        🌎 Participantes de diferentes países pueden participar
+        </p>
+
+        <hr>
+
+        <h4>¿Cómo funciona?</h4>
+
+        <p>
+        1️⃣ Elige un experimento<br>
+        2️⃣ Responde lo más rápido posible, sin pensarlo demasiado<br>
+        3️⃣ Cada experimento puede responderse hasta <b>3 veces por semana</b><br>
+        4️⃣ Ayuda a descubrir si el comportamiento humano es realmente impredecible
+        </p>
+
+        <hr>
+
+        <h4>¿Qué intentamos descubrir?</h4>
+
+        <p>
+        Muchas personas creen que sus decisiones son únicas. Pero cuando cientos o miles de respuestas se analizan juntas, pueden aparecer patrones sorprendentes.
+        </p>
+        """,
+
         "weekly_limit_text": "Puedes responder este experimento hasta 3 veces por semana.",
         "weekly_done_text": "Respuestas ya realizadas:",
     },
@@ -215,6 +330,38 @@ TEXTOS = {
 
         ⏱ Temps estimé : environ 2 minutes.
         🔒 Toutes les réponses sont anonymes.
+        """,
+        "instructions_card": """
+        <h3>🧠 Pouvez-vous être imprévisible ?</h3>
+
+        <p>
+        Cette étude cherche à savoir si des choix humains apparemment aléatoires suivent des tendances prévisibles lorsqu'ils sont analysés collectivement.
+        </p>
+
+        <p>
+        ⏱ Temps estimé : environ 2 minutes<br>
+        🔒 Toutes les réponses sont anonymes<br>
+        🌎 Des participants de différents pays peuvent participer
+        </p>
+
+        <hr>
+
+        <h4>Comment ça fonctionne ?</h4>
+
+        <p>
+        1️⃣ Choisissez une expérience<br>
+        2️⃣ Répondez le plus rapidement possible sans trop réfléchir<br>
+        3️⃣ Chaque expérience peut être réalisée jusqu'à <b>3 fois par semaine</b><br>
+        4️⃣ Aidez à découvrir si le comportement humain est réellement imprévisible
+        </p>
+
+        <hr>
+
+        <h4>Que cherchons-nous à découvrir ?</h4>
+
+        <p>
+        Beaucoup de personnes pensent que leurs choix sont uniques. Mais lorsque des centaines ou des milliers de réponses sont analysées ensemble, des tendances surprenantes peuvent apparaître.
+        </p>
         """,
         "weekly_limit_text": "Vous pouvez répondre à cette expérience jusqu'à 3 fois par semaine.",
         "weekly_done_text": "Réponses déjà envoyées :",
@@ -418,6 +565,23 @@ st.markdown(
 )
 
 st.title(t["title"])
+
+if MAINTENANCE_MODE:
+    st.warning(
+        "🚧 O aplicativo está temporariamente em manutenção para melhorias.\n\n"
+        "Voltaremos em breve."
+    )
+    st.stop()
+
+st.markdown(
+    f"""
+    <div class="instruction-card">
+        {t["instructions_card"]}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown(
     """
     <style>
@@ -505,8 +669,6 @@ if user_id is None:
     cookies["user_id"] = user_id
     cookies.save()
 
-st.info(f"{t['anonymous_id']} {user_id}")
-
 idade_cookie = cookies.get("idade")
 sexo_cookie = cookies.get("sexo")
 
@@ -556,12 +718,14 @@ else:
 
 col1, col2 = st.columns(2)
 
+
 with col1:
     st.metric(label="Participantes", value=total_participantes_global)
 
 with col2:
     st.metric(label="Respostas", value=total_respostas_global)
 
+st.info(f"{t['anonymous_id']} {user_id}")
 
 def contar_respostas_semanais(df, user_id, semana_ano, experimento):
     if df.empty:
@@ -613,9 +777,11 @@ if not st.session_state.experimento_iniciado:
         experimento
     )
 
+    restantes = MAX_RESPOSTAS_SEMANA - total_respostas_semana
+
     st.info(
-        f"{t['weekly_limit_text']}\n\n"
-        f"{t['weekly_done_text']} **{total_respostas_semana} de {MAX_RESPOSTAS_SEMANA}**"
+        f"✅ Você ainda possui **{restantes} participações disponíveis** "
+        f"para este experimento nesta semana."
 )
 
     pode_responder_experimento = total_respostas_semana < MAX_RESPOSTAS_SEMANA
