@@ -436,6 +436,66 @@ EXPERIMENT_LABELS = {
     }
 }
 
+
+INSTRUCOES_EXPERIMENTOS = {
+    "Português": {
+        "numero_0_100": "Escolha um único número inteiro entre 0 e 100. Não existe resposta certa ou errada. Responda intuitivamente, sem pensar demais.",
+        "numero_1_10": "Escolha um único número inteiro entre 1 e 10. Responda de forma espontânea.",
+        "cor": "Escolha a cor que vier primeiro à sua mente. Não tente ser estratégico.",
+        "cara_coroa": "Imagine que precisa escolher entre cara ou coroa. Selecione a opção que parecer mais natural.",
+        "direcao": "Escolha uma direção cardinal. Responda sem procurar justificativas.",
+        "forma_geometrica": "Escolha a forma geométrica que mais naturalmente chama sua atenção.",
+        "animal": "Escolha o animal que vier primeiro à sua mente.",
+        "carta_baralho": "Escolha livremente uma carta de baralho. Primeiro selecione o naipe e depois a carta.",
+        "mes_ano": "Escolha o mês que surgir primeiro na sua mente.",
+        "estacao": "Escolha a estação do ano que mais naturalmente lhe ocorre.",
+        "emoji": "Escolha o emoji que mais combina com sua reação espontânea.",
+        "clima": "Escolha a condição climática que vier primeiro à sua mente."
+    },
+    "English": {
+        "numero_0_100": "Choose one whole number between 0 and 100. There is no right or wrong answer. Answer intuitively, without overthinking.",
+        "numero_1_10": "Choose one whole number between 1 and 10. Answer spontaneously.",
+        "cor": "Choose the color that comes to your mind first. Do not try to be strategic.",
+        "cara_coroa": "Imagine you need to choose heads or tails. Select the option that feels most natural.",
+        "direcao": "Choose a cardinal direction. Answer without trying to justify it.",
+        "forma_geometrica": "Choose the geometric shape that naturally catches your attention.",
+        "animal": "Choose the animal that comes to your mind first.",
+        "carta_baralho": "Freely choose a playing card. First select the suit, then the card.",
+        "mes_ano": "Choose the month that comes to your mind first.",
+        "estacao": "Choose the season that naturally comes to mind.",
+        "emoji": "Choose the emoji that best matches your spontaneous reaction.",
+        "clima": "Choose the weather condition that comes to your mind first."
+    },
+    "Español": {
+        "numero_0_100": "Elige un único número entero entre 0 y 100. No hay respuesta correcta o incorrecta. Responde intuitivamente, sin pensarlo demasiado.",
+        "numero_1_10": "Elige un único número entero entre 1 y 10. Responde de forma espontánea.",
+        "cor": "Elige el color que venga primero a tu mente. No intentes ser estratégico.",
+        "cara_coroa": "Imagina que tienes que elegir entre cara o cruz. Selecciona la opción que parezca más natural.",
+        "direcao": "Elige una dirección cardinal. Responde sin buscar una justificación.",
+        "forma_geometrica": "Elige la forma geométrica que más naturalmente llame tu atención.",
+        "animal": "Elige el animal que venga primero a tu mente.",
+        "carta_baralho": "Elige libremente una carta de baraja. Primero selecciona el palo y luego la carta.",
+        "mes_ano": "Elige el mes que venga primero a tu mente.",
+        "estacao": "Elige la estación del año que venga más naturalmente a tu mente.",
+        "emoji": "Elige el emoji que mejor represente tu reacción espontánea.",
+        "clima": "Elige la condición climática que venga primero a tu mente."
+    },
+    "Français": {
+        "numero_0_100": "Choisissez un seul nombre entier entre 0 et 100. Il n'y a pas de bonne ou de mauvaise réponse. Répondez intuitivement, sans trop réfléchir.",
+        "numero_1_10": "Choisissez un seul nombre entier entre 1 et 10. Répondez spontanément.",
+        "cor": "Choisissez la couleur qui vous vient d'abord à l'esprit. N'essayez pas d'être stratégique.",
+        "cara_coroa": "Imaginez que vous devez choisir entre pile ou face. Sélectionnez l'option qui vous semble la plus naturelle.",
+        "direcao": "Choisissez une direction cardinale. Répondez sans chercher à vous justifier.",
+        "forma_geometrica": "Choisissez la forme géométrique qui attire naturellement votre attention.",
+        "animal": "Choisissez l'animal qui vous vient d'abord à l'esprit.",
+        "carta_baralho": "Choisissez librement une carte à jouer. Sélectionnez d'abord la couleur, puis la carte.",
+        "mes_ano": "Choisissez le mois qui vous vient d'abord à l'esprit.",
+        "estacao": "Choisissez la saison qui vous vient naturellement à l'esprit.",
+        "emoji": "Choisissez l'emoji qui correspond le mieux à votre réaction spontanée.",
+        "clima": "Choisissez la condition météo qui vous vient d'abord à l'esprit."
+    }
+}
+
 IDIOMA_CODIGO = {
     "Português": "PT",
     "English": "EN",
@@ -716,6 +776,10 @@ if not st.session_state.experimento_iniciado:
     )
 
     experimento = label_para_codigo[experimento_label]
+    st.info(
+    f"📝 **O que fazer neste experimento**\n\n"
+    f"{INSTRUCOES_EXPERIMENTOS[idioma][experimento]}"
+)
 
     total_respostas_semana = contar_respostas_semanais(
         df_respostas,
