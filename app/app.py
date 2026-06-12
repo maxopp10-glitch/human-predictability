@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 
 MAX_RESPOSTAS_SEMANA = 3
 APP_TIMEZONE = ZoneInfo("America/Sao_Paulo")
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True
 def agora_brasil():
     return datetime.now(APP_TIMEZONE)
 
@@ -88,7 +88,10 @@ TEXTOS = {
         """,
 
         "instructions_card": """
-        <h3>🧠 Você consegue ser imprevisível?</h3>
+        <h3>📋 Como participar</h3>
+        <p>
+        Descubra se suas escolhas seguem padrões parecidos com os da maioria das pessoas.
+        </p>
 
         <p>
         Este estudo investiga se escolhas humanas aparentemente aleatórias
@@ -109,7 +112,7 @@ TEXTOS = {
         1️⃣ Escolha um experimento<br>
         2️⃣ Responda o mais rápido possível, sem pensar demais<br>
         3️⃣ Cada experimento pode ser respondido até <b>3 vezes por semana</b><br>
-        4️⃣ Ajude a descobrir se o comportamento humano é realmente imprevisível
+        4️⃣ Compare suas escolhas com as de centenas de outras pessoas
         </p>
 
         <hr>
@@ -172,14 +175,14 @@ TEXTOS = {
         🔒 All answers are anonymous.
         """,
         "instructions_card": """
-        <h3>🧠 Can you be unpredictable?</h3>
+        <h3>📋 How to participate</h3>
 
         <p>
-        This study investigates whether seemingly random human choices follow predictable patterns when analyzed collectively.
+        Discover whether your choices follow patterns similar to those of most people.
         </p>
 
         <p>
-        ⏱ Estimated time: about 2 minutes<br>
+        ⏱ Total time: about 2 minutes<br>
         🔒 All responses are anonymous<br>
         🌎 Participants from different countries are welcome
         </p>
@@ -192,7 +195,7 @@ TEXTOS = {
         1️⃣ Choose an experiment<br>
         2️⃣ Answer as quickly as possible without overthinking<br>
         3️⃣ Each experiment can be answered up to <b>3 times per week</b><br>
-        4️⃣ Help discover whether human behavior is truly unpredictable
+        4️⃣ Compare your choices with those of hundreds of other participants
         </p>
 
         <hr>
@@ -200,7 +203,9 @@ TEXTOS = {
         <h4>What are we trying to discover?</h4>
 
         <p>
-        Many people believe their choices are unique. But when hundreds or thousands of answers are analyzed together, surprising patterns may emerge.
+        Many people believe their choices are unique.
+        However, when large groups of responses are analyzed together,
+        surprising patterns often emerge.
         </p>
         """,
         "weekly_limit_text": "You can answer this experiment up to 3 times per week.",
@@ -252,14 +257,14 @@ TEXTOS = {
         """,
 
         "instructions_card": """
-        <h3>🧠 ¿Puedes ser impredecible?</h3>
+        <h3>📋 Cómo participar</h3>
 
         <p>
-        Este estudio investiga si las decisiones humanas aparentemente aleatorias siguen patrones predecibles cuando se analizan en conjunto.
+        Descubre si tus decisiones siguen patrones similares a los de la mayoría de las personas.
         </p>
 
         <p>
-        ⏱ Tiempo estimado: aproximadamente 2 minutos<br>
+        ⏱ Tiempo total: aproximadamente 2 minutos<br>
         🔒 Todas las respuestas son anónimas<br>
         🌎 Participantes de diferentes países pueden participar
         </p>
@@ -272,7 +277,7 @@ TEXTOS = {
         1️⃣ Elige un experimento<br>
         2️⃣ Responde lo más rápido posible, sin pensarlo demasiado<br>
         3️⃣ Cada experimento puede responderse hasta <b>3 veces por semana</b><br>
-        4️⃣ Ayuda a descubrir si el comportamiento humano es realmente impredecible
+        4️⃣ Compara tus decisiones con las de cientos de otros participantes
         </p>
 
         <hr>
@@ -280,9 +285,11 @@ TEXTOS = {
         <h4>¿Qué intentamos descubrir?</h4>
 
         <p>
-        Muchas personas creen que sus decisiones son únicas. Pero cuando cientos o miles de respuestas se analizan juntas, pueden aparecer patrones sorprendentes.
+        Muchas personas creen que sus decisiones son únicas.
+        Sin embargo, cuando se analizan grandes cantidades de respuestas en conjunto,
+        pueden aparecer patrones sorprendentes.
         </p>
-        """,
+        """,,
 
         "weekly_limit_text": "Puedes responder este experimento hasta 3 veces por semana.",
         "weekly_done_text": "Respuestas ya realizadas:",
@@ -332,14 +339,14 @@ TEXTOS = {
         🔒 Toutes les réponses sont anonymes.
         """,
         "instructions_card": """
-        <h3>🧠 Pouvez-vous être imprévisible ?</h3>
+        <h3>📋 Comment participer</h3>
 
         <p>
-        Cette étude cherche à savoir si des choix humains apparemment aléatoires suivent des tendances prévisibles lorsqu'ils sont analysés collectivement.
+        Découvrez si vos choix suivent des tendances similaires à celles de la majorité des participants.
         </p>
 
         <p>
-        ⏱ Temps estimé : environ 2 minutes<br>
+        ⏱ Temps total : environ 2 minutes<br>
         🔒 Toutes les réponses sont anonymes<br>
         🌎 Des participants de différents pays peuvent participer
         </p>
@@ -352,7 +359,7 @@ TEXTOS = {
         1️⃣ Choisissez une expérience<br>
         2️⃣ Répondez le plus rapidement possible sans trop réfléchir<br>
         3️⃣ Chaque expérience peut être réalisée jusqu'à <b>3 fois par semaine</b><br>
-        4️⃣ Aidez à découvrir si le comportement humain est réellement imprévisible
+        4️⃣ Comparez vos choix à ceux de centaines d'autres participants
         </p>
 
         <hr>
@@ -360,7 +367,9 @@ TEXTOS = {
         <h4>Que cherchons-nous à découvrir ?</h4>
 
         <p>
-        Beaucoup de personnes pensent que leurs choix sont uniques. Mais lorsque des centaines ou des milliers de réponses sont analysées ensemble, des tendances surprenantes peuvent apparaître.
+        Beaucoup de personnes pensent que leurs choix sont uniques.
+        Cependant, lorsque de nombreuses réponses sont analysées ensemble,
+        des tendances surprenantes peuvent apparaître.
         </p>
         """,
         "weekly_limit_text": "Vous pouvez répondre à cette expérience jusqu'à 3 fois par semaine.",
@@ -501,68 +510,6 @@ idioma = st.selectbox(
 )
 
 t = TEXTOS[idioma]
-
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #f7fbff 0%, #eef4ff 45%, #ffffff 100%);
-    }
-
-    section.main > div {
-        max-width: 900px;
-        padding-top: 2rem;
-    }
-
-    h1 {
-        font-size: 3rem !important;
-        font-weight: 800 !important;
-        letter-spacing: -1px;
-    }
-
-    h2, h3 {
-        font-weight: 700 !important;
-    }
-
-    div[data-testid="stMetric"] {
-        background: rgba(255, 255, 255, 0.85);
-        border: 1px solid rgba(120, 140, 180, 0.18);
-        padding: 18px;
-        border-radius: 18px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-    }
-
-    div[data-testid="stAlert"] {
-        border-radius: 16px;
-    }
-
-    .instruction-card {
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(120, 140, 180, 0.18);
-        border-radius: 20px;
-        padding: 22px 24px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
-        margin: 18px 0 24px 0;
-    }
-
-    .instruction-card h3 {
-        margin-top: 0;
-        margin-bottom: 12px;
-    }
-
-    .instruction-card p {
-        margin-bottom: 8px;
-        line-height: 1.55;
-    }
-
-    .small-note {
-        color: #475569;
-        font-size: 0.95rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 st.title(t["title"])
 
